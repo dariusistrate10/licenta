@@ -1,0 +1,8 @@
+<div class="address-list">
+    <div class="address-card" *ngFor="let address of addresses">
+        <div class="address">
+            <p><fa-icon class="icon" [icon]="faHouse"></fa-icon>{{address.streetLine}}</p>
+            <p><fa-icon class="icon" [icon]="faLocation"></fa-icon>{{address.city}}</p>
+        </div>
+    </div>
+</div>

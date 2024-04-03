@@ -1,0 +1,52 @@
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+  /* background-color: rebeccapurple; */
+  background-color: #171717;
+  font-family: "Poppins";
+  overflow: hidden;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.sticky-navbar .sticky-navbar-container {
+  padding: 30px 30px 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: red;
+}
+
+.sticky-navbar .sticky-navbar-container .option {
+  cursor: pointer;
+}
+
+.sticky-navbar .sticky-navbar-container .icon {
+  color: #f0f0f0;
+  font-size: 20px;
+}
+
+.sticky-navbar .sticky-navbar-container p {
+  color: #f0f0f0;
+  margin-top: 15px;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

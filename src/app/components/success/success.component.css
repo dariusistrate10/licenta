@@ -1,0 +1,65 @@
+.success-nav {
+  font-family: "Poppins";
+}
+
+.success-nav {
+  width: 100vw;
+  padding: 30px 100px 30px 100px;
+}
+
+.success-nav .success-nav-container .logo h1 {
+  font-size: 40px;
+  /* color: #333; */
+  color: #171717;
+  letter-spacing: 1px;
+}
+
+.success-nav .success-nav-container .logo span {
+  font-size: 40px;
+  font-weight: 200;
+  /* color: #333; */
+  color: #171717;
+  letter-spacing: 1px;
+}
+
+.success {
+  position: relative;
+  font-family: "Poppins";
+  width: 100vw;
+  height: 100vh;
+  /* padding: 100px; */
+}
+
+.success .success-details {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 1000px;
+  /* margin: 0 auto; */
+  padding: 100px;
+  color: #171717;
+}
+
+.success .success-details span {
+  font-size: 100px;
+}
+
+.success .success-details .success-details-text h2 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.success .success-details .success-details-text p {
+  font-weight: 300;
+  width: 600px;
+  margin-top: 8px;
+}
+
+.success .success-details .success-details-text .go-back {
+  cursor: pointer;
+  font-weight: 400;
+}

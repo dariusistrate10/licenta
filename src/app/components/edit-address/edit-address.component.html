@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<div *ngIf="loggedUser" class="address">
+    <div class="profile-container">
+        <div *ngFor="let address of loggedUser.addresses; let i = index" class="current-profile">
+            <div class="user-name">
+                <h1>{{loggedUser.lastName}} <span>{{loggedUser.firstName}}</span></h1>
+            </div>
+            <div class="user-details">
+                <p><span>Street Line:</span> {{address.streetLine}}</p>
+                <p><span>City:</span> {{address.city}}</p>
+                <p><span>Postal Code:</span> {{address.postalCode}}</p>
+                <p><span>Country:</span> {{address.country}}</p>
+            </div>
+        </div>
+        <div class="edit-address">
+            <form>
+                <div class="input">
+                    <input type="text" placeholder="Street Line" required>
+                </div>
+                <div class="input">
+                    <input type="text" placeholder="City" required>
+                </div>
+                <div class="input">
+                    <input type="text" placeholder="Postal Code" required>
+                </div>
+                <div class="input">
+                    <input type="text" placeholder="Country" required>
+                </div>
+                <button>Edit</button>
+            </form>
+        </div>
+    </div>
+</div>
+

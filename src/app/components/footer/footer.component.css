@@ -1,0 +1,90 @@
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.footer {
+  position: absolute;
+  width: 100vw;
+  margin-top: 80px;
+  background-color: #171717;
+  border-top-left-radius: 15%;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  padding: 50px;
+  font-family: "Poppins";
+}
+
+.footer-column {
+  min-width: 160px;
+}
+
+.footer-column h1 {
+  position: relative;
+  font-size: 16px;
+  font-weight: 600;
+  /* color: #333; */
+  color: #f0f0f0;
+}
+
+.footer-column h1::after {
+  content: "";
+  width: 80%;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.footer-column .footer-links .links {
+  margin-top: 20px;
+}
+
+.footer-column .footer-links .links li {
+  margin-bottom: 5px;
+}
+
+.footer-column .footer-links .links li a {
+  /* color: #333; */
+  color: #f0f0f0;
+  transition: all 0.3s ease;
+  font-size: 12px;
+}
+
+.footer-column .footer-links .links li a:hover {
+  margin-left: 10px;
+}
+
+.footer-links .links-socials {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.footer-links .links-socials li a {
+  /* color: #333; */
+  color: #f0f0f0;
+}
+
+.footer-column .footer-links .links-socials li a {
+  width: 30px;
+  height: 30px;
+}
+
+.footer-links .links-socials li a .icon {
+  padding: 5px;
+  /* color: #333; */
+  color: #f0f0f0;
+  font-size: 18px;
+}

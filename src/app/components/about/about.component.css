@@ -1,0 +1,138 @@
+.about {
+  width: 100vw;
+  /* background-color: #fdfdf5; */
+}
+
+.about-container {
+  height: 450px;
+  /* background-color: #c5a2fe; */
+  /* background: rgb(170, 162, 240); */
+  /* background: linear-gradient(0deg, rgba(170, 162, 240, 1) 0%, #c5a2fe 100%); */
+  /* background-color: #333; */
+  background-color: #171717;
+  border-bottom-right-radius: 15%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.about-text {
+  text-align: center;
+  font-family: "Poppins";
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.about-text .about-title h1 {
+  font-size: 69px;
+  /* color: #333; */
+  color: #f0f0f0;
+}
+
+.about-text .about-content {
+  margin-top: 25px;
+  line-height: 1.8rem;
+  /* color: #333; */
+  color: #f0f0f0;
+}
+
+.about .about-brands .about-brands-title {
+  text-align: center;
+  font-family: "Poppins";
+  color: #333;
+}
+
+.about-brands {
+  margin-top: 100px;
+}
+
+.about-brands-brands {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  padding: 50px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.brand {
+  /* background-color: #e2d0fe; */
+  background-color: #f0f0f0;
+  min-width: 250px;
+  min-height: 250px;
+  margin: 0 auto;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Poppins";
+  box-shadow: #5b5b5b 5px 5px, #707070 10px 10px, #848484 15px 15px,
+    #999 20px 20px, #adadad 25px 25px;
+}
+
+.brand .brand-image h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.brand .brand-name h2 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #333;
+}
+
+@media (max-width: 1060px) {
+  .about-brands-brands {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .about-text .about-title h1 {
+    font-size: 50px;
+  }
+  .about-text .about-content p {
+    font-size: 12px;
+  }
+  .brand {
+    min-width: 180px;
+    min-height: 180px;
+  }
+  .brand .brand-image h1 {
+    font-size: 20px;
+  }
+  .brand .brand-name h2 {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 730px) {
+  .about-brands-brands {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 320px) {
+  .about-text .about-title h1 {
+    font-size: 30px;
+  }
+  .about-text .about-content p {
+    font-size: 11px;
+    line-height: 2.5;
+  }
+  .about .about-brands .about-brands-title {
+    font-size: 14px;
+  }
+  .brand {
+    min-width: 120px;
+    min-height: 120px;
+  }
+  .brand .brand-image h1 {
+    font-size: 17px;
+  }
+  .brand .brand-name h2 {
+    font-size: 9px;
+  }
+}

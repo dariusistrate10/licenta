@@ -1,0 +1,23 @@
+<h1 class="user-list-title">Customers of the month</h1>
+<div class="searchbar">
+    <input type="text" class="searchbar-input" [(ngModel)]="filteredString" placeholder="Search user">
+    <fa-icon [icon]="faSearch" class="search-icon"></fa-icon>
+</div>
+<div class="user-list">
+    <div *ngFor="let user of users | filter:filteredString">
+        <div class="user-container">
+            <div class="credentials">
+                <h2 class="user-lastname">{{user.lastName}}</h2>
+                <h1 class="user-firstname">{{user.firstName}}</h1>
+            </div>
+            <div class="additional-info">
+                <p><fa-icon [icon]="faEnvelope" class="icon"></fa-icon>{{user.email}}</p>
+                <p><fa-icon [icon]="faPhone" class="icon"></fa-icon>{{user.phoneNumber}}</p>
+                <div class="address" *ngFor="let address of user.addresses; let i = index">
+                    <p><fa-icon class="icon" [icon]="faHouse"></fa-icon>{{user.addresses[i].streetLine}}</p>
+                    <p><fa-icon class="icon" [icon]="faLocation"></fa-icon>{{user.addresses[i].city}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

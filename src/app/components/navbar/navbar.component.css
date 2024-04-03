@@ -1,0 +1,140 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+.navbar {
+  width: 100%;
+  padding: 10px 30px 10px 30px;
+  /* background-color: #c5a2fe; */
+  /* background-color: #333; */
+  background-color: #171717;
+  /* background-color: #12110d; */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.navbar .container .logo h1 {
+  font-size: 40px;
+  /* color: #333; */
+  color: #f0f0f0;
+  letter-spacing: 1px;
+}
+
+.navbar .container .logo span {
+  font-size: 40px;
+  font-weight: 200;
+  /* color: #333; */
+  color: #f0f0f0;
+  letter-spacing: 1px;
+}
+
+.links {
+  width: 500px;
+}
+
+.links ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.links .nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.links .nav-link .icon {
+  margin-right: 8px;
+  /* color: #333; */
+  color: #f0f0f0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  min-height: 160px;
+  width: 160px;
+  /* background-color: #e2d0fe; */
+  background-color: rgb(73, 73, 73);
+  border-radius: 4px;
+}
+
+.dropdown-content .dropdown-container {
+  padding: 5px;
+}
+
+.dropdown-content .products-link {
+  display: block;
+  padding: 8px;
+}
+
+.nav-link:hover .dropdown-content {
+  display: block;
+}
+
+.nav-link:hover .dropdown-content a {
+  font-size: 16px;
+  color: #f0f0f0;
+}
+
+.links ul li .dropdown-content .products-link a {
+  font-size: 12px;
+}
+
+.links ul li a {
+  font-size: 19px;
+  font-weight: 300;
+  /* color: #333; */
+  color: #f0f0f0;
+  letter-spacing: 0.6px;
+}
+
+/* .links ul li a:not(.nav-link-products):hover {
+  border-bottom: 2px solid #333;
+} */
+
+.links ul li .dropdown-content .products-link:hover {
+  border-bottom: 1px solid #333;
+  border: 0;
+}
+
+.links .nav-link {
+  cursor: pointer;
+}
+
+.hamburger-links {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .links {
+    width: 380px;
+  }
+}
+
+@media (max-width: 680px) {
+  .links {
+    display: none;
+  }
+
+  .hamburger-links {
+    display: block;
+  }
+}

@@ -1,0 +1,65 @@
+.profile {
+  font-family: "Poppins";
+  width: 100vw;
+}
+
+.profile-container {
+  padding-top: 150px;
+  width: 800px;
+  margin: 0 auto;
+  /* padding: 150px 300px 0 300px; */
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-name span {
+  font-weight: 300;
+}
+
+.user-details {
+  margin-top: 15px;
+}
+
+.user-details span {
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.user-details p {
+  margin-bottom: 5px;
+  font-weight: 300;
+}
+
+.edit-profile form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.edit-profile form .input input {
+  display: block;
+  height: 50px;
+  width: 200px;
+  padding: 12px;
+  border: 0;
+  outline: none;
+  border: 1px solid #171717;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.edit-profile form button {
+  display: block;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  border-radius: 8px;
+  background-color: #171717;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.edit-profile form button:hover {
+  background-color: #171717c4;
+}

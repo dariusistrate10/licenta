@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div *ngIf="loggedUser" class="profile">
+    <div class="profile-container">
+        <div class="current-profile">
+            <div class="user-name">
+                <h1>{{loggedUser.lastName}} <span>{{loggedUser.firstName}}</span></h1>
+            </div>
+            <div class="user-details">
+                <p><span>Email:</span> {{loggedUser.email}}</p>
+                <p><span>Phone:</span> {{loggedUser.phoneNumber}}</p>
+                <p><span>Billing:</span> {{loggedUser.defaultBillingAddress}}</p>
+                <p><span>Delivery:</span> {{loggedUser.defaultDeliveryAddress}}</p>
+            </div>
+        </div>
+        <div class="edit-profile">
+            <form>
+                <div class="input">
+                    <input name="firstName" [(ngModel)]="firstName" type="text" placeholder="First Name" required>
+                </div>
+                <div class="input">
+                    <input name="lastName" [(ngModel)]="lastName" type="text" placeholder="Last Name" required>
+                </div>
+                <div class="input">
+                    <input name="email" [(ngModel)]="email" type="email" placeholder="Email" required>
+                </div>
+                <div class="input">
+                    <input name="password" [(ngModel)]="password" type="password" placeholder="Password" required>
+                </div>
+                <div class="input">
+                    <input name="phone" [(ngModel)]="phone" type="tel" placeholder="Phone Number" required>
+                </div>
+                <div class="input">
+                    <input name="billingAddress" [(ngModel)]="billingAddress" type="text" placeholder="Billing Address" required>
+                </div>
+                <div class="input">
+                    <input name="deliveryAddress" [(ngModel)]="deliveryAddress" type="text" placeholder="Delivery Address" required>
+                </div>
+                <button (click)="updateUser()">Edit</button>
+            </form>
+        </div>
+    </div>
+</div>

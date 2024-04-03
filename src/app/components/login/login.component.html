@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<form (ngSubmit)="onSubmit()" class="login">
+    <div class="login-container">
+        <h1>Autentificare</h1>
+        <div class="login-form">
+            <form>
+                <label for="email" class="input">
+                    <input [(ngModel)]="email" name="email" type="email" placeholder="Email">
+                </label>
+                <label for="password" class="input">
+                    <input name="password" type="password" placeholder="Parola">
+                </label>
+            </form>
+        </div>
+        <div class="login-btn">
+            <input type="submit" value="Autentificare">
+            <p routerLink="/register">Nu aveti cont deja?</p>
+        </div>
+    </div>
+</form>
+<app-footer></app-footer>

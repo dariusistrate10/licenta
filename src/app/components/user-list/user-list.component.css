@@ -1,0 +1,118 @@
+.user-list-title {
+  text-align: center;
+  font-family: "Poppins";
+  margin-top: 90px;
+  font-weight: 300;
+  color: #333;
+}
+
+.searchbar {
+  position: relative;
+  margin-top: 100px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}
+
+.searchbar .searchbar-input {
+  display: block;
+  width: 50%;
+  height: 70px;
+  margin: 0 auto;
+  border-radius: 50px;
+  outline: none;
+  border: 2px solid #c5a2fe;
+  font-size: 18px;
+  padding-left: 35px;
+  font-weight: 500;
+}
+
+.searchbar .search-icon {
+  position: absolute;
+  right: 28%;
+  color: #333;
+}
+
+.user-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 70px;
+}
+
+.user-container {
+  padding: 40px;
+  margin: 0 auto;
+  background-color: #e2d0fe;
+  font-family: "Poppins";
+  border-radius: 8px;
+  width: 300px;
+  /* height: 300px; */
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.user-container .credentials {
+  margin-bottom: 30px;
+}
+
+.user-container .credentials .user-lastname {
+  font-weight: 200;
+  font-size: 19px;
+  color: #333;
+}
+
+.user-container .credentials .user-firstname {
+  font-weight: 500;
+  font-size: 32px;
+  color: #333;
+}
+
+.user-container .additional-info {
+  font-weight: 300;
+  color: #333;
+}
+
+.user-container .additional-info .icon {
+  margin-right: 10px;
+}
+
+.user-container .additional-info p {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.user-container .additional-info .address {
+  border: 2px solid #c5a2fe;
+  border-radius: 8px;
+  width: 150px;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-left: -2.2px;
+  padding: 10px;
+}
+
+.user-container .additional-info .address .icon {
+  margin-right: 10px;
+}
+
+.user-container .additional-info .address p {
+  font-size: 14px;
+}
+
+@media (max-width: 960px) {
+  .user-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 70px;
+  }
+}
+
+@media (max-width: 680px) {
+  .user-list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    margin-top: 70px;
+  }
+}

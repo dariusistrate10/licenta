@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div *ngIf="showModal" class="modal" data-attribute="modal">
+    <app-login-modal></app-login-modal>
+</div>
+<div *ngIf="product" class="product-detail">
+    <div class="product-detail-container">
+        <h1>{{product.description}}</h1>
+        <div class="product-info">
+            <img src='{{product.photoUrl}}' width="400" height="400" alt="">
+            <div class="product-extra">
+                <div class="category" *ngFor="let category of product.categories; let j = index">
+                    <h2>{{product.categories[j].name}}</h2>
+                    <p>{{product.categories[j].name}} / {{product.categories[j].description}}</p>
+                </div>
+                <div class="product-values" *ngFor="let value of product.productValues; let k = index">
+                    <h2>{{product.productValues[k].attribute}}: <span>{{product.productValues[k].value}}</span></h2>
+                </div>
+                <div class="extra-info">
+                    <h4>Beneficii</h4>
+                    <ul>
+                        <li><p><fa-icon class="icon" [icon]="faCheck"></fa-icon>Retur gratuit in 30 zile</p></li>
+                        <li><p><fa-icon class="icon" [icon]="faCheck"></fa-icon>Garantie inclusa 12 luni</p></li>
+                        <li><p><fa-icon class="icon" [icon]="faCheck"></fa-icon>Livrare gratuita</p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cta-details">
+                <h3>{{product.price}} €</h3>
+                <p *ngIf="product.quantity">In stock</p>
+                <button *ngIf="product.quantity" class="btn" (click)="addItemToCart(product.id)"><fa-icon class="icon" [icon]="faCart"></fa-icon>Add to Cart</button>
+                <p *ngIf="!product.quantity">Notify me when available</p>
+                <button *ngIf="product.quantity==0" class="btnOOS"><fa-icon class="icon" [icon]="faCart"></fa-icon>Out of stock</button>
+            </div>
+        </div>
+        
+        <div class="alte-produse-title">
+            <h2>Alte produse similare:</h2>
+        </div>
+        <div class="alte-produse">
+            <!-- <div class="leftSwipe"><fa-icon [icon]="faArrowLeft"></fa-icon></div> -->
+            <!-- <div class="rightSwipe"><fa-icon [icon]="faArrowRight"></fa-icon></div> -->
+            <div *ngFor="let produse of products; let y = index">
+                <div *ngIf="produse.quantity" [routerLink]="['/product', produse.id]" class="produs-auxiliar">
+                    <h1>{{produse.name}}</h1>
+                    <img src='{{produse.photoUrl}}' width="60" height="60" alt="">
+                    <p>{{produse.price}} €</p>
+                    <button class="btn" (click)="addItemToCart(product.id)"><fa-icon class="icon" [icon]="faCart"></fa-icon>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<div class="products">
+    <div class="products-container">
+        <div class="products-text">
+            <div class="products-title">
+                <h1>Products</h1>
+            </div>
+            <div class="products-content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ea ipsum animi corrupti odio perspiciatis.</p>
+            </div>
+        </div>
+        <div class="searchbar">
+            <input type="text" class="searchbar-input" [(ngModel)]="filteredString" placeholder="Search a product">
+            <fa-icon [icon]="faSearch" class="search-icon"></fa-icon>
+        </div>
+        <div class="filters">
+            <div class="price-range">
+                <label for="price">Price range</label>
+                <input type="range" id="price" [(ngModel)]="maxPrice">
+                <span>{{maxPrice*50}}€</span>
+            </div>
+            <div class="categories">
+                <div class="category-input">
+                    <label for="laptop">Laptops</label>
+                    <input type="checkbox" id="laptop">
+                </div>
+                <div class="category-input">
+                    <label for="phone">Phones</label>
+                    <input type="checkbox" id="phone">
+                </div>
+                <div class="category-input">
+                    <label for="headphone">Headphones</label>
+                    <input type="checkbox" id="headphone">
+                </div>
+            </div>
+            <div class="btn">
+                <button (click)="applyFilter()">Aplica filtru</button>
+            </div>
+        </div>
+    </div>
+    <div class="products-grid">
+        <div *ngFor="let product of products | async | productfilter:filteredString; let i = index">
+            <div [routerLink]="['/product', product.id]" class="product">
+                <div class="product-details">
+                    <!-- <h1>{{product.name}}</h1> -->
+                    <img src={{product.photoUrl}} alt="">
+                    <h3 class="description">{{product.description}}</h3>
+                    <!-- <h3 class="date">Added date: {{product.addedDate}}</h3> -->
+                </div>
+                <div class="price-details">
+                    <p class="price">{{product.price}} €</p>
+                    <p class="stock" *ngIf="product.quantity">In stock</p>
+                    <p class="outOfStock" *ngIf="product.quantity==0">Out of stock</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

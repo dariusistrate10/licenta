@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<div *ngIf="showModal" class="modal" data-attribute="modal">
+    <app-login-modal></app-login-modal>
+</div>
+<div *ngIf="product" class="product-detail">
+    <div class="product-detail-container">
+        <h1>{{product.description}}</h1>
+        <div class="product-info">
+            <img src='{{product.photoUrl}}' width="400" height="400" alt="">
+            <div class="product-extra">
+                <div class="category">
+                    <h2>{{product.categoryVariant.name}}</h2>
+                    <p>{{product.categoryVariant.name}} / {{product.categoryVariant.description}}</p>
+                </div>
+                <div class="product-values" *ngFor="let value of product.attributeVariant.productVariantAttributes; let i = index">
+                    <h2>{{product.attributeVariant.productVariantAttributes[i].variantAttributeValue.name}}: <span>{{product.attributeVariant.productVariantAttributes[i].variantAttributeValue.value}}</span></h2>
+                </div>
+                <div class="extra-info">
+                    <h4>Beneficii</h4>
+                    <ul>
+                        <li><p><fa-icon class="icon" [icon]="faCheck"></fa-icon>Retur gratuit in 30 zile</p></li>
+                        <li><p><fa-icon class="icon" [icon]="faCheck"></fa-icon>Garantie inclusa 12 luni</p></li>
+                        <li><p><fa-icon class="icon" [icon]="faCheck"></fa-icon>Livrare gratuita</p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cta-details">
+                <h3>{{product.price}} Lei</h3>
+                <p *ngIf="product.quantity">In stoc</p>
+                <button *ngIf="product.quantity" class="btn" (click)="addItemToCart(product.id)"><fa-icon class="icon" [icon]="faCart"></fa-icon>Adauga in cos</button>
+                <p *ngIf="!product.quantity">Anunta-ma cand este disponibil</p>
+                <button *ngIf="product.quantity==0" class="btnOOS"><fa-icon class="icon" [icon]="faCart"></fa-icon>Stoc epuizat</button>
+            </div>
+        </div>
+        <div *ngFor="let productVariants of products; let j = index">
+            <!-- <div [routerLink]="['/products/variant/', productVariants.id]" *ngIf="productVariants.description.includes('M2') && product.description.includes('M2')">
+            </div> -->
+            <!-- <div [routerLink]="['/products/variant/', productVariants.id]" *ngIf="productVariants.categoryVariant == 1 || (productVariants.categoryVariant.name == product.categoryVariant.name)">
+                <img src='{{productVariants.photoUrl}}' width="60" height="60" alt="">
+            </div> -->
+        </div>
+        
+        <div class="alte-produse-title">
+            <h2>Alte produse similare:</h2>
+        </div>
+        <div class="alte-produse">
+            <!-- <div class="leftSwipe"><fa-icon [icon]="faArrowLeft"></fa-icon></div>
+            <!-- <div class="rightSwipe"><fa-icon [icon]="faArrowRight"></fa-icon></div> -->
+            <div *ngFor="let produse of products; let y = index">
+                <div *ngIf="produse.quantity" [routerLink]="['/products/variant', produse.id]" class="produs-auxiliar">
+                    <h1>{{produse.name}}</h1>
+                    <img src='{{produse.photoUrl}}' width="60" height="60" alt="">
+                    <p>{{produse.price}} €</p>
+                    <button class="btn" (click)="addItemToCart(product.id)"><fa-icon class="icon" [icon]="faCart"></fa-icon>Adauga</button>
+                </div>
+            </div>
+        </div>
+        <div class="reviews">
+            <nav>
+                <h3>Recenzii</h3>
+                <div class="reviews-btn">Adauga recenzie</div>
+            </nav>
+            <div class="reviews-container">
+                <div class="review">
+                    <div class="review-profile">
+                        <div class="profile-image"><span>DI</span></div>
+                        <p>Darius Istrate</p>
+                        <p>darius@gmail.com</p>
+                    </div>
+                    <div class="review-text">
+                        <h4>Merita</h4>
+                        <p>Laptopul achiziționat aici a depășit orice așteptare! Performanță excepțională și design atrăgător.</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="review">
+                    <div class="review-profile">
+                        <div class="profile-image"><span>DI</span></div>
+                        <p>Darius Istrate</p>
+                        <p>darius@gmail.com</p>
+                    </div>
+                    <div class="review-text">
+                        <h4>Merita</h4>
+                        <p>Laptopul achiziționat aici m-a uimit! Ecran vibrant, performanță rapidă și design elegant.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

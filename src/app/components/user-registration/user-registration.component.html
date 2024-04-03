@@ -1,0 +1,60 @@
+<div class="registration">
+    <div class="registration-container">
+        <div class="registration-form">
+            <h1>Inregistrare</h1>
+            <form (click)=onSubmit()>
+                <div class="input">
+                    <label for="firstname">Prenume</label>
+                    <input name="firstname" [(ngModel)]="firstname" id="firstname" type="text" placeholder="e.g. Ionescu" required>
+                </div>
+                <div class="input">
+                    <label for="lastname">Nume</label>
+                    <input name="lastname" [(ngModel)]="lastname" id="lastname" type="text" placeholder="e.g. Andrei" required>
+                </div>
+                <div class="input">
+                    <label for="email">Email</label>
+                    <input name="email" [(ngModel)]="email" id="email" type="email" placeholder="e.g. ionescu@gmail.com" required>
+                </div>
+                <div class="input">
+                    <label for="password">Parola</label>
+                    <input name="password" [(ngModel)]="password" id="password" type="password" placeholder="e.g. Ionescu123$" required>
+                </div>
+                <div class="input">
+                    <label for="phone">Numar telefon</label>
+                    <input name="phone" [(ngModel)]="phone" id="phone" type="tel" placeholder="e.g. 0735245934" required>
+                </div>
+                <div class="input">
+                    <label for="delivery">Adresa livrare</label>
+                    <input name="delivery" [(ngModel)]="delivery" id="delivery" type="text" placeholder="e.g. Str. Putna nr6" required>
+                </div>
+                <div class="input">
+                    <label for="billing">Adresa facturare</label>
+                    <input name="billing" [(ngModel)]="billing" id="billing" type="text" placeholder="e.g. Str. Putna nr6" required>
+                </div>
+                <div class="input">
+                    <label for="streetline">Strada</label>
+                    <input name="streetline" [(ngModel)]="streetline" id="streetline" type="text" placeholder="e.g. Str. Putna nr6" required>
+                </div>
+                <div class="input">
+                    <label for="postalcode">Postal Code</label>
+                    <input name="postalcode" [(ngModel)]="postalcode" id="postalcode" type="text" placeholder="e.g. 307160" required>
+                </div>
+                <div class="input">
+                    <label for="city">Oras</label>
+                    <input name="city" [(ngModel)]="city" id="city" type="text" placeholder="e.g. Dumbravita" required>
+                </div>
+                <div class="input">
+                    <label for="country">Tara</label>
+                    <input name="country" [(ngModel)]="country" id="country" type="text" placeholder="e.g. Romania" required>
+                </div>
+                <div class="submit-btn">
+                    <input type="submit" value="Inregistrare">
+                </div>
+            </form>
+            <div class="terms">
+                <p routerLink="/login">Aveti deja cont creat?</p>
+                <p>Înregistrandu-va, sunteți de acord cu Termenii și Condițiile și Declarația de confidențialitate.</p>
+            </div>
+        </div>
+    </div>
+</div>

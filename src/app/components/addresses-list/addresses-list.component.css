@@ -1,0 +1,17 @@
+.address {
+  border: 2px solid #c5a2fe;
+  border-radius: 8px;
+  width: 150px;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-left: -2.2px;
+  padding: 10px;
+}
+
+p {
+  font-size: 14px;
+}
+
+.icon {
+  margin-right: 10px;
+}

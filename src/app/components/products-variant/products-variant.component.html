@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="products">
+    <div class="products-container">
+        <div class="products-text">
+            <div class="products-title">
+                <h1>Produse</h1>
+            </div>
+            <div class="products-content">
+                <p>Explorează laptopurile de gaming: performanță extremă, grafică uimitoare și design captivant. 
+                    O poartă către aventura digitală.</p>
+            </div>
+        </div>
+        <div class="searchbar">
+            <input type="text" class="searchbar-input" [(ngModel)]="filteredString" placeholder="Cauta un produs">
+            <fa-icon [icon]="faSearch" class="search-icon"></fa-icon>
+        </div>
+        <div class="filters">
+            <div class="price-range">
+                <label for="price">Pret</label>
+                <input type="range" id="price" [(ngModel)]="maxPrice">
+                <span>{{maxPrice*50}}€</span>
+            </div>
+            <div class="categories">
+                <div class="category-input">
+                    <label for="laptop">Laptopuri</label>
+                    <input type="checkbox" id="laptop" value="1">
+                </div>
+                <div class="category-input">
+                    <label for="phone">Telefoane</label>
+                    <input type="checkbox" id="phone" value="2">
+                </div>
+                <div class="category-input">
+                    <label for="headphone">Casti</label>
+                    <input type="checkbox" id="headphone" value="3">
+                </div>
+            </div>
+            <div class="btn">
+                <button (click)="applyFilter()">Aplica filtru</button>
+            </div>
+        </div>
+    </div>
+    <div class="products-grid">
+        <div *ngFor="let product of productVariants | async | productfilter:filteredString; let i = index">
+            <div [routerLink]="['/products/variant', product.id]" class="product">
+                <div class="product-details">
+                    <!-- <h1>{{product.name}}</h1> -->
+                    <img src={{product.photoUrl}} alt="">
+                    <h3 class="description">{{product.description}}</h3>
+                    <!-- <h3 class="date">Added date: {{product.addedDate}}</h3> -->
+                </div>
+                <div class="price-details">
+                    <p class="price">{{product.price}} Lei</p>
+                    <p class="stock" *ngIf="product.quantity">In stoc</p>
+                    <p class="outOfStock" *ngIf="product.quantity==0">Stoc epuizat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

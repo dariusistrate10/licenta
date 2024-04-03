@@ -1,0 +1,165 @@
+<app-navbar></app-navbar>
+<div *ngIf="showModal" class="modal">
+    <app-login-modal></app-login-modal>
+</div>
+<div *ngIf="productCounter" class="sticky-navbar">
+    <div class="sticky-navbar-container">
+        <div (click)="goCheckout()" class="checkout option">
+            <fa-icon class="icon" [icon]="faCart"></fa-icon>
+            <p>Checkout</p>
+        </div>
+        <div (click)="goDelivery()" class="delivery option">
+            <fa-icon class="icon" [icon]="faDelivery"></fa-icon>
+            <p>Delivery</p>
+        </div>
+        <div (click)="goPayment()" class="payment option">
+            <fa-icon class="icon" [icon]="faPayment"></fa-icon>
+            <p>Payment</p>
+        </div>
+    </div>
+</div>
+<div class="cart">
+    <div *ngIf="!productCounter" class="empty-cart-container">
+        <h1 class="">Cos de cumparaturi gol <span><fa-icon [icon]="faCart"></fa-icon></span></h1>
+        <p routerLink="/products/variants">Incepe cumparaturile acum</p>
+    </div>
+    <div *ngIf="productCounter" id="targetCheckout" class="cart-container">
+        <h1>Totalul cosului este {{cartTotal$ | async}} Lei</h1>
+        <div *ngIf="foundCart">
+            <div *ngFor="let productEntry of cartEntries$ | async">
+                <div *ngFor="let product of productEntry.productVariants; let i = index" class="product-details">
+                    <div class="product-image">
+                        <img src='{{productEntry.productVariants[i].photoUrl}}' alt="imagine">
+                    </div>
+                    <div class="product-description">
+                        <p>{{productEntry.productVariants[i].description}}</p>
+                        <div class="product-attributes">
+                            <ul>
+                                <li>Pret: {{productEntry.productVariants[i].price}} Lei</li>
+                                <li>Cantitate: {{productEntry.quantity}} <span class="quantity-modify"><span (click)="incrementQuantity(productEntry)"><fa-icon [icon]="faPlus"></fa-icon></span><span>|</span><span (click)="decrementQuantity(productEntry)"><fa-icon [icon]="faMinus"></fa-icon></span></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="btn-delete">
+                        <span (click)="deleteCartEntry(productEntry.id)"><fa-icon [icon]="faTrash"></fa-icon></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="checkout-details">
+            <div class="shipping">
+                <p>Transport</p>
+                <div class="price">
+                    <p>GRATUIT</p>
+                </div>
+            </div>
+            <div class="subtotal">
+                <p>Subtotal</p>
+                <div class="price">
+                    <p>{{cartTotal$ | async}} Lei</p>
+                </div>
+            </div>
+            <div class="total">
+                <p>Total</p>
+                <div class="price">
+                    <p>{{cartTotal$ | async}} Lei</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="productCounter" class="checkout-btn">
+            <button class="btn" (click)="toggleDeliveryForm()">Cumpara</button>
+        </div>
+        <!-- <div *ngIf="!productCounter" class="empty-cart">
+            <p>Your cart is empty</p>
+        </div> -->
+        <div *ngIf="isShowDeliveryForm" id="targetDelivery" class="forms">
+            <h1>Transport</h1>
+            <form *ngFor="let address of loggedUser.addresses; let j = index" class="form">
+                <div class="form-container">
+                    <h2>Date client</h2>
+                    <div class="user-delivery-details">
+                        <div class="user-info">
+                            <h2><fa-icon class="user-icon" [icon]="faUser"></fa-icon>{{loggedUser.firstName}} <span>{{loggedUser.lastName}}</span></h2>
+                            <p><span>Telefon: </span> {{loggedUser.phoneNumber}}</p>
+                            <p><span>Email: </span> {{loggedUser.email}}</p>
+                            <p><span>Livrare: </span> {{loggedUser.defaultDeliveryAddress}}</p>
+                            <p><span>Facturare: </span> {{loggedUser.defaultBillingAddress}}</p>
+                        </div>
+                        <div class="user-info-update">
+                            <p routerLink="/edit/profile">Editeaza</p>
+                        </div>
+                    </div>
+                    <h2>Adresa livrare</h2>
+                    <div *ngIf="address" class="user-delivery-details user-delivery-address-details">
+                        <div class="user-info">
+                            <h2><fa-icon class="user-icon" [icon]="faHome"></fa-icon>{{address.streetLine}}</h2>
+                            <p><span>Livrare: </span>{{loggedUser.defaultDeliveryAddress}}</p>
+                            <p><span>Cod postal: </span>{{address.postalCode}}</p>
+                            <p><span>Tara: </span>{{address.country}}</p>
+                        </div>
+                        <div class="user-info-update">
+                            <p routerLink="/edit/address">Editeaza</p>
+                        </div>
+                    </div>
+                    <!-- <div class="form-input">
+                        <label for="streetline">
+                            <input [(ngModel)]="streetLine" name="streetline" type="text" placeholder="Street Line">
+                        </label>
+                    </div>
+                    <div class="form-input">
+                        <label for="postalcode">
+                            <input [(ngModel)]="postalCode" name="postalcode" type="text" placeholder="Postal Code">
+                        </label>
+                    </div>
+                    <div class="form-input">
+                        <label for="city">
+                            <input [(ngModel)]="city" name="city" type="text" placeholder="City">
+                        </label>
+                    </div>
+                    <div class="form-input">
+                        <label for="country">
+                            <input [(ngModel)]="country" name="country" type="text" placeholder="Country">
+                        </label>
+                    </div> -->
+                </div>
+            </form>
+            <button (click)="togglePaymentForm()" class="btn">Continua catre plata<fa-icon class="icon" [icon]="faPayment"></fa-icon></button>
+        </div>
+        <div *ngIf="isShowPaymentForm" id="targetPayment" class="forms">
+            <h1>Plata</h1>
+            <form class="form">
+                <div class="form-container">
+                    <div class="form-input">
+                        <label for="cardnumber">
+                            <input [(ngModel)]="cardNumber" [ngClass]="{'input-error': cardNumberInputError}" class="payment-input" pattern="[0-9]{16}" name="cardnumber" type="text" placeholder="Numar card" required>
+                        </label>
+                    </div>
+                    <div class="form-input">
+                        <label for="cardholder">
+                            <input [(ngModel)]="cardHolderName" [ngClass]="{'input-error': cardHolderNameInputError}" class="payment-input" name="cardholder" type="text" placeholder="Titular card" required>
+                        </label>
+                    </div>
+                    <div class="card-expiry-dates">
+                        <div class="form-input">
+                            <label for="expirymonth">
+                                <input [(ngModel)]="expiryMonth" [ngClass]="{'input-error': expiryMonthInputError}" class="payment-input" name="expirymonth" type="text" placeholder="Luna expirare" required>
+                            </label>
+                        </div>
+                        <div class="form-input">
+                            <label for="expiryyear">
+                                <input [(ngModel)]="expiryYear" [ngClass]="{'input-error': expiryYearInputError}" class="payment-input" name="expiryyear" type="text" placeholder="An expirare" required>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <label for="cvv">
+                            <input [(ngModel)]="cvv" [ngClass]="{'input-error': cvvInputError}" class="payment-input" name="cvv" type="password" placeholder="CVV" required>
+                        </label>
+                    </div>
+                </div>
+            </form>
+            <button (click)="checkout()" class="btn">Confirma comanda<fa-icon class="icon" [icon]="faCheck"></fa-icon></button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

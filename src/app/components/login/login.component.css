@@ -1,0 +1,112 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Poppins";
+  /* background-color: #fdfdf5; */
+}
+
+.login .login-container {
+  padding: 150px;
+}
+
+.login .login-container h1 {
+  text-align: center;
+  font-size: 50px;
+}
+
+.login .login-container .login-form {
+  width: 500px;
+  margin: 0 auto;
+  padding-top: 35px;
+}
+
+.login .login-container .login-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login .login-container .login-form form .input input {
+  display: block;
+  width: 300px;
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.login .login-container .login-btn input {
+  display: block;
+  margin: 0 auto;
+  margin-top: 25px;
+  border: 0;
+  font-family: "Poppins";
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 300px;
+  border-radius: 4px;
+  font-size: 18px;
+  background-color: #171717;
+  color: #f0f0f0;
+}
+
+.login .login-container .login-btn input:hover {
+  background-color: #333;
+}
+
+.login .login-container .login-btn p {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  font-size: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.login .login-container .login-btn p::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 45%;
+  background-color: #171717;
+  bottom: 0;
+  display: none;
+}
+
+.login .login-container .login-btn p:hover::before {
+  display: block;
+}
+
+@media (max-width: 850px) {
+  .login .login-container {
+    padding: 150px 100px 100px 100px;
+  }
+}
+
+@media (max-width: 700px) {
+  .login .login-container {
+    padding: 150px 20px 20px 20px;
+  }
+}
+
+@media (max-width: 550px) {
+  .login .login-container {
+    padding: 100px 20px 20px 20px;
+  }
+  .login .login-container .login-form {
+    width: 200px;
+  }
+  .login .login-container .login-form form .input input {
+    width: 200px;
+  }
+  .login .login-container .login-btn input {
+    width: 200px;
+  }
+  .login .login-container .login-btn p {
+    text-align: center;
+    width: 180px;
+  }
+}

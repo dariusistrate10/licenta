@@ -1,0 +1,216 @@
+li {
+  list-style: none;
+}
+
+.icon {
+  margin-right: 12px;
+  color: #333;
+}
+
+.product-detail {
+  width: 100vw;
+  overflow-x: hidden;
+  /* filter: blur(8px); */
+}
+
+.product-detail .product-detail-container {
+  position: relative;
+  width: 85%;
+  padding: 50px;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+.product-detail-container h1 {
+  font-weight: 500;
+  margin-bottom: 50px;
+  margin-top: 40px;
+}
+
+.product-detail-container .product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #333;
+}
+
+.product-detail-container .product-extra .category h2 {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.product-detail-container .product-extra .category p {
+  position: absolute;
+  top: 60px;
+  left: 50px;
+}
+
+.product-detail-container .product-extra .product-values h2 {
+  font-size: 19px;
+  margin-bottom: 2px;
+  font-weight: 400;
+}
+
+.product-detail-container .product-extra .product-values span {
+  font-size: 19px;
+  font-weight: 300;
+  margin-left: 5px;
+}
+
+.product-detail-container .product-info .product-extra .extra-info {
+  margin-top: 55px;
+}
+
+.product-detail-container .product-info .product-extra .extra-info h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.product-detail-container .product-info .cta-details {
+  border: 1px solid #333;
+  border-radius: 8px;
+  min-width: 200px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.product-detail-container .product-info .cta-details h3 {
+  font-size: 35px;
+  color: #333;
+  font-weight: 500;
+}
+
+.product-detail-container .product-info .cta-details h3 {
+  font-size: 35px;
+  color: #333;
+  font-weight: 500;
+}
+
+.product-detail-container .product-info .cta-details p {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.product-detail-container .product-info .cta-details button {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  border: 0;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: #fff;
+  font-family: "Poppins";
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+  padding: 12px;
+}
+
+.product-detail-container .product-info .cta-details .btn:hover {
+  background-color: #f0f0f0;
+}
+
+.product-detail-container .product-info .cta-details .btnOOS {
+  cursor: default;
+  background-color: #f0f0f0;
+}
+
+.product-detail-container .alte-produse-title h2 {
+  margin-top: 100px;
+  font-weight: 500;
+}
+
+.product-detail-container .alte-produse {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  overflow: scroll;
+  width: 100%;
+  padding: 20px 0 20px 0;
+  cursor: pointer;
+}
+
+.product-detail-container .alte-produse .leftSwipe {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  left: 47%;
+  width: 30px;
+  height: 30px;
+  color: #333;
+  border: 1px solid #333;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.product-detail-container .alte-produse .rightSwipe {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  right: 47%;
+  width: 30px;
+  height: 30px;
+  color: #333;
+  border: 1px solid #333;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  height: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 8px;
+}
+
+.product-detail-container .alte-produse div {
+  text-align: center;
+  width: 200px;
+  height: 220px;
+}
+
+.product-detail-container div .produs-auxiliar {
+  border: 1.8px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.product-detail-container div .produs-auxiliar h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.product-detail-container div .produs-auxiliar p {
+  font-size: 16px;
+}
+
+.product-detail-container .alte-produse .produs-auxiliar button {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  border: 0;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #fff;
+  font-family: "Poppins";
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+  outline: none;
+  padding: 9px;
+  margin-top: 15px;
+}
+
+.product-detail-container .alte-produse .produs-auxiliar button:hover {
+  background-color: #f0f0f0;
+}

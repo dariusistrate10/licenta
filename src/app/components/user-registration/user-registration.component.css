@@ -1,0 +1,117 @@
+.registration {
+  width: 100vw;
+  font-family: "Poppins";
+  /* background-color: #fdfdf5; */
+}
+
+.registration .registration-form {
+  width: 950px;
+  margin: 0 auto;
+  padding: 120px;
+}
+
+.registration .registration-form h1 {
+  text-align: center;
+  font-size: 50px;
+}
+
+.registration .registration-form form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding-top: 50px;
+}
+
+.registration .registration-form .input {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.registration .registration-form .input label {
+  font-size: 18px;
+}
+
+.registration .registration-form .input input {
+  display: block;
+  width: 300px;
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.registration .registration-form .submit-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 auto;
+  width: 300px;
+  font-family: "Poppins";
+}
+
+.registration .registration-form .submit-btn input {
+  display: block;
+  width: 300px;
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  font-size: 15px;
+  margin-top: 5px;
+  background-color: #171717;
+  color: #f0f0f0;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.registration .registration-form .submit-btn input:hover {
+  background-color: #333;
+}
+
+.registration .registration-form .terms {
+  padding: 25px;
+}
+
+.registration .registration-form .terms p:nth-child(1) {
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 8px;
+  width: 220px;
+}
+
+.registration .registration-form .terms p:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 78%;
+  background-color: #171717;
+  bottom: 0;
+  display: none;
+}
+
+.registration .registration-form .terms p:nth-child(1):hover::before {
+  display: block;
+}
+
+/* @media (max-width: 975px) {
+  .registration .registration-form {
+    padding: 120px 50px 50px 50px;
+    padding: 120px 0 0 0;
+  }
+  .registration .registration-form .input label {
+    font-size: 17px;
+  }
+  .registration .registration-form .input {
+    width: 100px;
+  }
+  .registration .registration-form .input input {
+    width: 100px;
+  }
+  .registration .registration-form .submit-btn input {
+    width: 100px;
+  }
+  .registration .registration-form .terms {
+    padding: 25px;
+    width: 700px;
+  }
+} */
