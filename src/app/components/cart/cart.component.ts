@@ -12,14 +12,14 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { CartentryService } from 'src/app/services/cartentry.service';
 import { BehaviorSubject, Observable, count, filter, map, switchMap } from 'rxjs';
-import { CartEntry } from 'src/app/CartEntry';
+import { CartEntry } from 'src/app/utils/CartEntry';
 import { Router } from '@angular/router';
 import { PaymentService } from 'src/app/services/payment.service';
-import { Payment } from 'src/app/Payment';
+import { Payment } from 'src/app/utils/Payment';
 import { OrderService } from 'src/app/services/order.service';
-import { User } from 'src/app/User';
+import { User } from 'src/app/utils/User';
 import { CartService } from 'src/app/services/cart.service';
-import { Cart } from 'src/app/Cart';
+import { Cart } from 'src/app/utils/Cart';
 
 @Component({
   selector: 'app-cart',
@@ -55,7 +55,6 @@ export class CartComponent implements OnInit {
   cartTotal!: number;
   cartQuantity$!: Observable<number>;
   loggedUser: any = JSON.parse(localStorage.getItem('user') || 'null');
-  // loggedUser: User = JSON.parse(sessionStorage.getItem('user') || 'null');
   foundCart: any = JSON.parse(localStorage.getItem('cart') || 'null');
   cardNumber!: string;
   cardHolderName!: string;
@@ -74,12 +73,7 @@ export class CartComponent implements OnInit {
         localStorage.setItem('cart', JSON.stringify(this.foundCart))
       });
     }
-    // console.log(this.loggedUser.id)
     if(this.foundCart) {
-      // this.cartEntryService.getSpecificCartEntry(this.foundCart.id).subscribe(data =>{
-      //   // console.log(data)
-      //   this.userProducts = data;
-      // })
       this.cartEntryService.getCartEntry(this.foundCart.id).subscribe((cartEntries) => {
         this.cartEntries$.next(cartEntries)
         this.productCounter = cartEntries.length
@@ -95,22 +89,8 @@ export class CartComponent implements OnInit {
           )
         )
       );
-      // this.cartTotal$ = this.cartEntries$.pipe(
-      //   map((cartEntries) => cartEntries.map(cartEntry => cartEntry.product?.price ?? 0).reduce((entry1,entry2) => entry1 + entry2,0))
-      // )
       this.productEntries = this.cartEntryService.cartEntries$;
     }
-    // this.cartEntryService.getCartEntry().subscribe((cartEntries) => {
-    //   this.cartEntries$.next(cartEntries)
-    //   console.log(cartEntries)
-    // })
-    // this.cartTotal$ = this.cartEntries$.pipe(
-    //   map((cartEntries) => cartEntries.map(cartEntry => cartEntry.product?.price ?? 0).reduce((entry1,entry2) => entry1 + entry2,0))
-    // )
-    // this.productEntries = this.cartEntryService.cartEntries$;
-    // this.cartTotal$ = this.cartEntryService.cartEntries$.pipe(
-    //   map((cartEntries) => cartEntries.map(cartEntry => cartEntry.products?.price ?? 0).reduce((entry1,entry2) => entry1 + entry2,0))
-    // )
   }
 
   deleteCartEntry(productId: number) {
@@ -121,7 +101,6 @@ export class CartComponent implements OnInit {
 
   incrementQuantity(productEntry: CartEntry) {
     productEntry.quantity++;
-    // console.log(productEntry.product.price*productEntry.quantity)
     this.cartEntryService.updateCartEntry(productEntry.id, productEntry.quantity).subscribe();
     window.location.reload();
   }
@@ -144,7 +123,6 @@ export class CartComponent implements OnInit {
       this.showModal = true;
       const elementBlur = this.elementRef.nativeElement.querySelector('.cart-container')
       elementBlur.style.filter = 'blur(8px)';
-      // this.router.navigate(['/login'])
     }
   }
 
@@ -152,11 +130,9 @@ export class CartComponent implements OnInit {
     if(this.loggedUser) {
       this.isShowPaymentForm = true;
     } else {
-      // alert('Login or Register to place an order!');
       this.showModal = true;
       const elementBlur = this.elementRef.nativeElement.querySelector('.cart-container')
       elementBlur.style.filter = 'blur(8px)';
-      // this.router.navigate(['/login'])
     }
   }
 
@@ -174,7 +150,7 @@ export class CartComponent implements OnInit {
       } else { this.expiryYearInputError = false } if(!this.cvv) {
         this.cvvInputError = true;
       } else { this.cvvInputError = false }
-      
+
       if(this.cardNumber && this.cardHolderName && this.expiryMonth && this.expiryYear && this.cvv) {
         const payment: Payment = {
           // id: Math.random(),
@@ -191,7 +167,7 @@ export class CartComponent implements OnInit {
           this.orderService.addOrder(payment, this.loggedUser.id, this.foundCart.id).subscribe();
           setTimeout(() => {this.cartEntryService.deleteAllCartEntries(this.foundCart.id).subscribe()}, 3000)
           this.router.navigate(['/success'])
-        } 
+        }
       }
     } else {
       alert('Login or Register to place an order!');

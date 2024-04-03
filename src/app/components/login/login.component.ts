@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { User } from 'src/app/User';
+import { User } from 'src/app/utils/User';
 import { UserService } from 'src/app/services/user.service';
 import { CartService } from 'src/app/services/cart.service';
-import { Cart } from 'src/app/Cart';
+import { Cart } from 'src/app/utils/Cart';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   cart!: Cart;
   foundCart!: Cart;
   user = JSON.parse(localStorage.getItem('user') || '{}');
-  // user = JSON.parse(sessionStorage.getItem('user') || '{}');
 
   constructor(private userService: UserService, private router: Router, private location: Location, private cartService: CartService) {}
 
@@ -32,14 +31,11 @@ export class LoginComponent implements OnInit {
       this.foundUser = user;
       if(this.password === this.user.password) {
         localStorage.setItem('user', JSON.stringify(this.foundUser));
-        // this.cartService.addCart(this.foundUser.id).subscribe();
-        // sessionStorage.setItem('user', JSON.stringify(this.foundUser));
         this.cartService.findCartByUserId(this.foundUser.id).subscribe((data) => {
           console.log(data)
           this.foundCart = data;
           localStorage.setItem('cart', JSON.stringify(this.foundCart))
         });
-        // localStorage.setItem('cart', JSON.stringify(this.cart));
         this.router.navigate(['/']);
       }
       console.log(this.foundUser);

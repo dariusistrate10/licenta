@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { ProductVariant } from 'src/app/ProductVariant';
+import { ProductVariant } from 'src/app/utils/ProductVariant';
 import { ProductVariantService } from 'src/app/services/product-variant.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class ProductsVariantComponent implements OnInit {
     const categoryHeadphones = this.elementRef.nativeElement.querySelector('#headphone')
 
     this.productVariants = this.productVariantService.getProductVariantsByPrice(0, this.maxPrice*50)
-    
+
     if(categoryHeadphones.checked === true) {
       this.productVariants = this.productVariantService.getProductVariantsByCategory(categoryHeadphones.value);
     }

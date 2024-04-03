@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Address } from 'src/app/Address';
-import { User } from 'src/app/User';
+import { Address } from 'src/app/utils/Address';
+import { User } from 'src/app/utils/User';
 import { AddressService } from 'src/app/services/address.service';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';

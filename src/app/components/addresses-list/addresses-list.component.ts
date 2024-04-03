@@ -20,7 +20,6 @@ export class AddressesListComponent implements OnInit {
   ngOnInit(): void {
     this.addressService.getAddresses().subscribe(data => {
       this.addresses = data;
-      // console.log(this.addresses)
     })
   }
 }

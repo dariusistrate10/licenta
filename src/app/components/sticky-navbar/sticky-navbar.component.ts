@@ -18,8 +18,4 @@ export class StickyNavbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  // scroll(el: HTMLElement) {
-  //   el.scrollIntoView({behavior: 'smooth'})
-  // }
 }

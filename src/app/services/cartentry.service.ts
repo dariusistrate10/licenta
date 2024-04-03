@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, reduce, switchMap, tap } from 'rxjs';
-import { CartEntry } from '../CartEntry';
-import { Product } from '../Product';
+import { CartEntry } from '../utils/CartEntry';
+import { Product } from '../utils/Product';
 
 @Injectable({
   providedIn: 'root'

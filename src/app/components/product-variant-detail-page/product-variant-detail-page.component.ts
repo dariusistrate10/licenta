@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductVariant } from 'src/app/ProductVariant';
+import { ProductVariant } from 'src/app/utils/ProductVariant';
 import { ProductVariantService } from 'src/app/services/product-variant.service';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { User } from 'src/app/User';
+import { User } from 'src/app/utils/User';
 import { CartentryService } from 'src/app/services/cartentry.service';
 import { ProductVariantAttributeValueService } from 'src/app/services/product-variant-attribute-value.service';
 
@@ -44,11 +44,9 @@ export class ProductVariantDetailPageComponent implements OnInit {
     if(this.loggedUser) {
       this.cartEntryService.addCartEntryVariant(this.foundCart.id, productVariantId).subscribe();
     } else {
-      // alert("You must sign in in order to add this item to cart");
       this.showModal = true;
       const elementBlur = this.elementRef.nativeElement.querySelector('.product-detail')
       elementBlur.style.filter = 'blur(8px)';
-      // this.router.navigate(['/login']);
     }
   }
 
@@ -57,10 +55,4 @@ export class ProductVariantDetailPageComponent implements OnInit {
       this.product = data;
     })
   }
-
-  // getProductVariantAttributeValues() {
-  //   this.productVariantAttributeValueService.getProductVariantAttributeValues().subscribe((data) => {
-  //     console.log(data)
-  //   })
-  // }
 }

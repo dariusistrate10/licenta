@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/User';
+import { User } from 'src/app/utils/User';
 
 @Component({
   selector: 'app-edit-address',

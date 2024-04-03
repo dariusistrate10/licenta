@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
-import { Product } from 'src/app/Product';
+import { Product } from 'src/app/utils/Product';
 import { CartentryService } from 'src/app/services/cartentry.service';
 import { ProductService } from 'src/app/services/product.service';
 
