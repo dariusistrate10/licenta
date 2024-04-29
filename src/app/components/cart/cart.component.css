@@ -105,7 +105,7 @@ li {
 }
 
 .cart .cart-container .product-details .product-description {
-  text-align: center;
+  text-align: left;
   /* width: 600px; */
 }
 
@@ -308,7 +308,7 @@ li {
   border-radius: 4px;
   border: 1px solid #333;
 }
-/* 
+/*
 .cart .cart-container .forms .form .form-container .form-input input:invalid {
   border-color: red;
 } */

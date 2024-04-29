@@ -26,20 +26,31 @@
   transform: translateY(0);
 }
 
+.homepage .homepage-container .homepage-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .homepage .homepage-container .homepage-title h1 {
-  font-size: 76px;
+  font-size: 60px;
   width: 100%;
+  line-height: 132%;
+  letter-spacing: -0.8px;
 }
 
 .homepage .homepage-container .homepage-title p {
   font-size: 18px;
-  width: 100%;
-  margin-top: 15px;
-  letter-spacing: 0.6px;
+  max-width: 700px;
+  margin-top: 30px;
+  letter-spacing: 1px;
+  line-height: 147%;
 }
 
 .products-showcase {
   padding: 150px 0px 150px 0px;
+  line-height: 120%;
+  letter-spacing: 0.1px;
 }
 
 .products-showcase .products {
@@ -87,6 +98,8 @@
 .homepage .homepage-container .reviews-showcase h1 {
   font-weight: 600;
   text-align: center;
+  line-height: 120%;
+  letter-spacing: 0.1px;
 }
 
 .homepage .homepage-container .reviews-showcase .reviews {
