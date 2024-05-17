@@ -1,4 +1,5 @@
 import { Address } from "./Address";
+import {FormControl} from "@angular/forms";
 
 export interface User {
     id?: number,
@@ -10,4 +11,20 @@ export interface User {
     defaultDeliveryAddress: string,
     defaultBillingAddress: string,
     addresses: Address[]
+}
+
+export interface AddEditUser {
+  firstName: FormControl<string | null>,
+  lastName: FormControl<string | null>,
+  email: FormControl<string | null>,
+  phoneNumber: FormControl<number | null>,
+  password: FormControl<string | null>,
+  defaultDeliveryAddress: FormControl<string | null>,
+  defaultBillingAddress: FormControl<string | null>,
+  addresses: FormControl<Address[] | null>
+}
+
+export interface LoginForm {
+  email: FormControl<string | null>,
+  password: FormControl<string | null>
 }

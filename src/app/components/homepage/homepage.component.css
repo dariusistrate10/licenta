@@ -95,11 +95,69 @@
   transition: 0.5s ease all;
 }
 
+.upcoming h1 {
+  text-align: center;
+}
+
+.upcoming-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 70px;
+}
+
+.upcoming-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8px 16px;
+  background-color: #171717;
+  color: #fff;
+  border-radius: 12px;
+  min-height: 200px;
+  font-size: 19px;
+  position: relative;
+  opacity: 1;
+  transition: 0.3s ease-in all;
+}
+
+.upcoming-product p {
+  opacity: 1;
+  transition: 0.3s ease-in all;
+}
+
+.upcoming-product:hover {
+  opacity: 0.7;
+  transition: 0.3s ease-in all;
+}
+
+.upcoming-product:hover p {
+  opacity: 0;
+  transition: 0.3s ease-in all;
+}
+
+.upcoming-product::after {
+  content: "Precomanda indisponibila";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: 0.3s ease-in all;
+}
+
+.upcoming-product:hover::after {
+  opacity: 1;
+  transition: 0.3s ease-in all;
+}
+
 .homepage .homepage-container .reviews-showcase h1 {
   font-weight: 600;
   text-align: center;
   line-height: 120%;
   letter-spacing: 0.1px;
+  margin-top: 70px;
 }
 
 .homepage .homepage-container .reviews-showcase .reviews {
@@ -144,16 +202,20 @@
   .homepage .homepage-container .products-showcase .products {
     display: block;
   }
+
   .homepage .homepage-container .products-showcase .products .product {
     margin-bottom: 30px;
   }
+
   .homepage .homepage-container .homepage-title {
     text-align: center;
   }
+
   .homepage .homepage-container .homepage-title p {
     width: 100%;
     margin-top: 50px;
   }
+
   .homepage .homepage-container .homepage-title h1 {
     font-size: 50px;
   }
@@ -163,6 +225,7 @@
   .homepage .homepage-container {
     padding: 100px 100px 0;
   }
+
   .homepage .homepage-container .homepage-title h1 {
     font-size: 50px;
   }
@@ -176,37 +239,47 @@
   .homepage .homepage-container {
     padding: 100px 40px 0;
   }
+
   .homepage .homepage-container .homepage-title h1 {
     font-size: 30px;
   }
+
   .homepage .homepage-container .homepage-title p {
     font-weight: 200;
     font-size: 16px;
   }
+
   .homepage .homepage-container .reviews .review:nth-child(2) {
     display: none;
   }
+
   .homepage .homepage-container .reviews .review:nth-child(3) {
     display: none;
   }
+
   .homepage .homepage-container .reviews .review p {
     font-size: 12px;
     margin: 0;
   }
+
   .homepage .homepage-container .reviews-showcase h1 {
     text-align: center;
   }
+
   .homepage .homepage-container .reviews-showcase .reviews .review p {
     width: 150px;
     margin: 0 auto;
   }
+
   .homepage .homepage-container .products-showcase h1 {
     text-align: center;
     font-size: 25px;
   }
+
   .homepage .homepage-container .products-showcase .products .product img {
     width: 120px;
   }
+
   .homepage .homepage-container .reviews-showcase .reviews {
     text-align: center;
   }

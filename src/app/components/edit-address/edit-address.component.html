@@ -14,19 +14,31 @@
         </div>
         <div class="edit-address">
             <form>
-                <div class="input">
-                    <input type="text" placeholder="Street Line" required>
+                <div>
+                  <mat-form-field>
+                    <mat-label>Strada</mat-label>
+                    <input type="text" matInput [formControl]="form.controls.streetLine">
+                  </mat-form-field>
                 </div>
-                <div class="input">
-                    <input type="text" placeholder="City" required>
+                <div>
+                  <mat-form-field>
+                    <mat-label>Oras</mat-label>
+                    <input type="text" matInput [formControl]="form.controls.city">
+                  </mat-form-field>
                 </div>
-                <div class="input">
-                    <input type="text" placeholder="Postal Code" required>
+                <div>
+                  <mat-form-field>
+                    <mat-label>Cod postal</mat-label>
+                    <input type="text" matInput [formControl]="form.controls.postalCode">
+                  </mat-form-field>
                 </div>
-                <div class="input">
-                    <input type="text" placeholder="Country" required>
+                <div>
+                  <mat-form-field>
+                    <mat-label>Tara</mat-label>
+                    <input type="text" matInput [formControl]="form.controls.country">
+                  </mat-form-field>
                 </div>
-                <button>Edit</button>
+                <button (click)="updateAddress()">Editati</button>
             </form>
         </div>
     </div>

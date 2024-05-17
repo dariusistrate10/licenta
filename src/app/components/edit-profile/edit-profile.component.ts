@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/utils/User';
+import {AddEditUser, User} from 'src/app/utils/User';
 import { UserService } from 'src/app/services/user.service';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,15 +13,20 @@ import { UserService } from 'src/app/services/user.service';
 export class EditProfileComponent implements OnInit {
 
   loggedUser: User = JSON.parse(localStorage.getItem('user') || 'null');
-  firstName: string = ''
-  lastName: string = ''
-  email: string = ''
-  password: string = ''
-  phone: string = ''
-  billingAddress: string = ''
-  deliveryAddress: string = ''
+  public form = new FormGroup<AddEditUser>({
+    firstName: new FormControl(null, Validators.required),
+    lastName: new FormControl(null, Validators.required),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+    defaultDeliveryAddress: new FormControl(null),
+    defaultBillingAddress: new FormControl(null),
+    addresses: new FormControl(null),
+    phoneNumber: new FormControl(null, Validators.required)
+  })
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router,
+              private userService: UserService,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     if(this.loggedUser == null) {
@@ -28,21 +35,14 @@ export class EditProfileComponent implements OnInit {
   }
 
   updateUser() {
-    const updatedUser: any = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      password: this.password,
-      phone: this.phone,
-      billingAddress: this.billingAddress,
-      deliveryAddress: this.deliveryAddress
+    const user = this.form.value
+    if(this.form.valid) {
+      this.userService.updateUser(user).subscribe()
+    } else {
+      this.snackBar.open('Formular invalid', 'Inchideti', {
+        duration: 3000
+      });
     }
-
-    console.log(updatedUser)
-
-    this.userService.updateUser(updatedUser).subscribe((data) => {
-      console.log(data)
-    });
   }
 
 }

@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { UsersComponent } from './components/users/users.component';
@@ -34,6 +34,13 @@ import { ScrollRevealComponent } from './components/scroll-reveal/scroll-reveal.
 import { ProductsVariantComponent } from './components/products-variant/products-variant.component';
 import { ProductVariantDetailPageComponent } from './components/product-variant-detail-page/product-variant-detail-page.component';
 import { EquipageComponent } from './components/equipage/equipage.component';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatButtonModule} from "@angular/material/button";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BlogComponent } from './components/blog/blog.component';
+import {MatCardModule} from "@angular/material/card";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBL49jzwaXcjRHZz3vMzDv-jcmf710TWJY",
@@ -73,6 +80,7 @@ const firebaseConfig = {
     ProductsVariantComponent,
     ProductVariantDetailPageComponent,
     EquipageComponent,
+    BlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,8 +90,16 @@ const firebaseConfig = {
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireStorageModule,
+    NoopAnimationsModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [MatSnackBarModule],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

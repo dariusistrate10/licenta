@@ -41,6 +41,14 @@
         </div>
       </div>
     </div>
+    <div *ngIf="deals.length > 0" class="upcoming">
+      <h1>Urmeaza in magazin</h1>
+      <div class="upcoming-products-grid">
+        <div class="upcoming-product" *ngFor="let deal of deals.slice(0,6); let i = index">
+          <p class="product-text">{{deal.name}}</p>
+        </div>
+      </div>
+    </div>
     <div class="reviews-showcase">
       <h1>Recenziile clientilor</h1>
       <div class="reviews">

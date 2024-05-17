@@ -1,0 +1,30 @@
+.blog {
+  font-family: "Poppins";
+}
+
+.blog-container {
+  padding: 100px 160px 0 160px;
+}
+
+.blog-container h1 {
+  font-size: 50px;
+}
+
+p {
+  text-align: center;
+  padding: 150px;
+}
+
+.article {
+  padding: 20px 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 19px;
+  background-color: #171717;
+  color: #fff;
+  max-width: 800px;
+}
+
+.article h4 {
+  max-width: 600px;
+}

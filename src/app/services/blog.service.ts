@@ -5,13 +5,13 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class HomepageService {
+export class BlogService {
 
   private url = `http://127.0.0.1:5000`
 
   constructor(private http: HttpClient) { }
 
-  getDeals():Observable<any> {
-    return this.http.get(`${this.url}/scrape/deals`)
+  getNews():Observable<any> {
+    return this.http.get(`${this.url}/scrape/news`)
   }
 }

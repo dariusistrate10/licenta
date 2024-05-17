@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="blog">
+  <div *ngIf="articles.length > 0; else noArticles" class="blog-container">
+    <h1>Noutati rapide</h1>
+    <mat-card class="article" *ngFor="let article of articles; let i = index">
+      <h4>{{article.title}}</h4>
+    </mat-card>
+  </div>
+  <ng-template #noArticles>
+    <p>Noutatile nu sunt disponibile momentan...</p>
+  </ng-template>
+</div>
+<app-footer></app-footer>
