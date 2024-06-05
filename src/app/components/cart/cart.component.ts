@@ -1,25 +1,27 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
-import { faTruckFast } from '@fortawesome/free-solid-svg-icons';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
-import { faSquareMinus } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { CartentryService } from 'src/app/services/cartentry.service';
-import { BehaviorSubject, Observable, count, filter, map, switchMap } from 'rxjs';
-import { CartEntry } from 'src/app/utils/CartEntry';
-import { Router } from '@angular/router';
-import { PaymentService } from 'src/app/services/payment.service';
-import { Payment } from 'src/app/utils/Payment';
-import { OrderService } from 'src/app/services/order.service';
-import { User } from 'src/app/utils/User';
-import { CartService } from 'src/app/services/cart.service';
-import { Cart } from 'src/app/utils/Cart';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {faCreditCard} from '@fortawesome/free-solid-svg-icons';
+import {faCheckCircle} from '@fortawesome/free-regular-svg-icons';
+import {faTruckFast} from '@fortawesome/free-solid-svg-icons';
+import {faCartShopping} from '@fortawesome/free-solid-svg-icons';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faSquarePlus} from '@fortawesome/free-solid-svg-icons';
+import {faSquareMinus} from '@fortawesome/free-solid-svg-icons';
+import {faUser} from '@fortawesome/free-solid-svg-icons';
+import {faHome} from '@fortawesome/free-solid-svg-icons';
+import {faPhone} from '@fortawesome/free-solid-svg-icons';
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import {CartentryService} from 'src/app/services/cartentry.service';
+import {BehaviorSubject, Observable, count, filter, map, switchMap} from 'rxjs';
+import {CartEntry} from 'src/app/utils/CartEntry';
+import {Router} from '@angular/router';
+import {PaymentService} from 'src/app/services/payment.service';
+import {AddEditPayment, Payment} from 'src/app/utils/Payment';
+import {OrderService} from 'src/app/services/order.service';
+import {User} from 'src/app/utils/User';
+import {CartService} from 'src/app/services/cart.service';
+import {Cart} from 'src/app/utils/Cart';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-cart',
@@ -62,18 +64,27 @@ export class CartComponent implements OnInit {
   expiryYear!: string;
   cvv!: string;
 
-  constructor(private cartEntryService: CartentryService, private router: Router, private paymentService: PaymentService, private orderService: OrderService, private cartService: CartService, private elementRef: ElementRef) {}
+  protected form = new FormGroup<AddEditPayment>({
+    cardNumber: new FormControl(null, Validators.required),
+    cardHolderName: new FormControl(null, Validators.required),
+    expiryYear: new FormControl(null, Validators.required),
+    expiryMonth: new FormControl(null, Validators.required),
+    cvv: new FormControl(null, Validators.required)
+  })
+
+  constructor(private cartEntryService: CartentryService, private router: Router, private paymentService: PaymentService, private orderService: OrderService, private cartService: CartService, private elementRef: ElementRef, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
     console.log(this.loggedUser)
-    if(this.loggedUser) {
+    if (this.loggedUser) {
       this.cartService.findCartByUserId(this.loggedUser.id).subscribe((data) => {
         console.log(data)
         this.foundCart = data;
         localStorage.setItem('cart', JSON.stringify(this.foundCart))
       });
     }
-    if(this.foundCart) {
+    if (this.foundCart) {
       this.cartEntryService.getCartEntry(this.foundCart.id).subscribe((cartEntries) => {
         this.cartEntries$.next(cartEntries)
         this.productCounter = cartEntries.length
@@ -109,7 +120,7 @@ export class CartComponent implements OnInit {
     productEntry.quantity--;
     this.cartEntryService.updateCartEntry(productEntry.id, productEntry.quantity).subscribe();
     window.location.reload();
-    if(productEntry.quantity < 1) {
+    if (productEntry.quantity < 1) {
       alert("Discard item from cart?")
       this.cartEntryService.deleteCartEntry(productEntry.id).subscribe();
       window.location.reload();
@@ -117,7 +128,7 @@ export class CartComponent implements OnInit {
   }
 
   toggleDeliveryForm() {
-    if(this.loggedUser) {
+    if (this.loggedUser) {
       this.isShowDeliveryForm = true;
     } else {
       this.showModal = true;
@@ -127,7 +138,7 @@ export class CartComponent implements OnInit {
   }
 
   togglePaymentForm() {
-    if(this.loggedUser) {
+    if (this.loggedUser) {
       this.isShowPaymentForm = true;
     } else {
       this.showModal = true;
@@ -136,44 +147,61 @@ export class CartComponent implements OnInit {
     }
   }
 
-  checkout() {
-    if(this.loggedUser) {
-      if(!this.cardNumber) {
-        console.log("error")
-        this.cardNumberInputError = true;
-      } else { this.cardNumberInputError = false } if(!this.cardHolderName) {
-        this.cardHolderNameInputError = true;
-      } else { this.cardHolderNameInputError = false } if(!this.expiryMonth) {
-        this.expiryMonthInputError = true;
-      } else { this.expiryMonthInputError = false } if(!this.expiryYear) {
-        this.expiryYearInputError = true;
-      } else { this.expiryYearInputError = false } if(!this.cvv) {
-        this.cvvInputError = true;
-      } else { this.cvvInputError = false }
-
-      if(this.cardNumber && this.cardHolderName && this.expiryMonth && this.expiryYear && this.cvv) {
-        const payment: Payment = {
-          // id: Math.random(),
-          cardNumber: this.cardNumber,
-          cardHolderName: this.cardHolderName,
-          expiryMonth: this.expiryMonth,
-          expiryYear: this.expiryYear,
-          cvv: this.cvv,
-        }
-        console.log(payment)
-        console.log(this.loggedUser.id)
-        console.log(this.foundCart.id)
-        if(payment) {
-          this.orderService.addOrder(payment, this.loggedUser.id, this.foundCart.id).subscribe();
-          setTimeout(() => {this.cartEntryService.deleteAllCartEntries(this.foundCart.id).subscribe()}, 3000)
-          this.router.navigate(['/success'])
-        }
+  public placeOrder() {
+    const payment = this.form.value as Payment
+    if (this.loggedUser) {
+      if (this.form.value) {
+        this.orderService.addOrder(payment, this.loggedUser.id, this.foundCart.id).subscribe()
+        setTimeout(() => {
+          this.cartEntryService.deleteAllCartEntries(this.foundCart.id).subscribe()
+        }, 3000)
+        this.router.navigate(['/success'])
+      } else {
+        this.snackBar.open("Formular invalid!", "Inchideti", {
+          duration: 5000
+        })
       }
-    } else {
-      alert('Login or Register to place an order!');
-      this.router.navigate(['/login'])
     }
   }
+
+  // checkout() {
+  //   if(this.loggedUser) {
+  //     if(!this.cardNumber) {
+  //       console.log("error")
+  //       this.cardNumberInputError = true;
+  //     } else { this.cardNumberInputError = false } if(!this.cardHolderName) {
+  //       this.cardHolderNameInputError = true;
+  //     } else { this.cardHolderNameInputError = false } if(!this.expiryMonth) {
+  //       this.expiryMonthInputError = true;
+  //     } else { this.expiryMonthInputError = false } if(!this.expiryYear) {
+  //       this.expiryYearInputError = true;
+  //     } else { this.expiryYearInputError = false } if(!this.cvv) {
+  //       this.cvvInputError = true;
+  //     } else { this.cvvInputError = false }
+  //
+  //     if(this.cardNumber && this.cardHolderName && this.expiryMonth && this.expiryYear && this.cvv) {
+  //       const payment: Payment = {
+  //         // id: Math.random(),
+  //         cardNumber: this.cardNumber,
+  //         cardHolderName: this.cardHolderName,
+  //         expiryMonth: this.expiryMonth,
+  //         expiryYear: this.expiryYear,
+  //         cvv: this.cvv,
+  //       }
+  //       console.log(payment)
+  //       console.log(this.loggedUser.id)
+  //       console.log(this.foundCart.id)
+  //       if(payment) {
+  //         this.orderService.addOrder(payment, this.loggedUser.id, this.foundCart.id).subscribe();
+  //         setTimeout(() => {this.cartEntryService.deleteAllCartEntries(this.foundCart.id).subscribe()}, 3000)
+  //         this.router.navigate(['/success'])
+  //       }
+  //     }
+  //   } else {
+  //     alert('Login or Register to place an order!');
+  //     this.router.navigate(['/login'])
+  //   }
+  // }
 
   goCheckout() {
     document.getElementById("targetCheckout")

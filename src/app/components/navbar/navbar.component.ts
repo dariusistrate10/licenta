@@ -18,11 +18,12 @@ export class NavbarComponent implements OnInit {
   faCart = faCartShopping;
   cartQuantity$!: Observable<number>
   loggedUser = JSON.parse(localStorage.getItem('user') || 'null')
-  // loggedUser = JSON.parse(sessionStorage.getItem('user') || 'null')
+  public role!: string | null
 
   constructor(private cartEntryService: CartentryService, private router: Router) {}
 
   ngOnInit(): void {
+    this.role = this.loggedUser.role
     this.cartQuantity$ = this.cartEntryService.cartEntries$.pipe(
       map((cartEntries) => cartEntries.length)
     );

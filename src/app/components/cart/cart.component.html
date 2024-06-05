@@ -6,15 +6,15 @@
     <div class="sticky-navbar-container">
         <div (click)="goCheckout()" class="checkout option">
             <fa-icon class="icon" [icon]="faCart"></fa-icon>
-            <p>Checkout</p>
+            <p>Detalii cos</p>
         </div>
         <div (click)="goDelivery()" class="delivery option">
             <fa-icon class="icon" [icon]="faDelivery"></fa-icon>
-            <p>Delivery</p>
+            <p>Livrare</p>
         </div>
         <div (click)="goPayment()" class="payment option">
             <fa-icon class="icon" [icon]="faPayment"></fa-icon>
-            <p>Payment</p>
+            <p>Plata</p>
         </div>
     </div>
 </div>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <h2>Adresa livrare</h2>
-                    <div *ngIf="address" class="user-delivery-details user-delivery-address-details">
+                    <div class="user-delivery-details user-delivery-address-details">
                         <div class="user-info">
                             <h2><fa-icon class="user-icon" [icon]="faHome"></fa-icon>{{address.streetLine}}</h2>
                             <p><span>Livrare: </span>{{loggedUser.defaultDeliveryAddress}}</p>
@@ -129,36 +129,56 @@
             <h1>Plata</h1>
             <form class="form">
                 <div class="form-container">
-                    <div class="form-input">
-                        <label for="cardnumber">
-                            <input [(ngModel)]="cardNumber" [ngClass]="{'input-error': cardNumberInputError}" class="payment-input" pattern="[0-9]{16}" name="cardnumber" type="text" placeholder="Numar card" required>
-                        </label>
+                    <div>
+                      <mat-form-field style="width: 500px">
+                        <mat-label>Numar card</mat-label>
+                        <input type="text" matInput [formControl]="form.controls.cardNumber">
+                      </mat-form-field>
+<!--                        <label for="cardnumber">-->
+<!--                            <input [(ngModel)]="cardNumber" [ngClass]="{'input-error': cardNumberInputError}" class="payment-input" pattern="[0-9]{16}" name="cardnumber" type="text" placeholder="Numar card" required>-->
+<!--                        </label>-->
                     </div>
-                    <div class="form-input">
-                        <label for="cardholder">
-                            <input [(ngModel)]="cardHolderName" [ngClass]="{'input-error': cardHolderNameInputError}" class="payment-input" name="cardholder" type="text" placeholder="Titular card" required>
-                        </label>
+                    <div>
+                      <mat-form-field style="width: 500px">
+                        <mat-label>Detinator card</mat-label>
+                        <input type="text" matInput [formControl]="form.controls.cardHolderName">
+                      </mat-form-field>
+<!--                        <label for="cardholder">-->
+<!--                            <input [(ngModel)]="cardHolderName" [ngClass]="{'input-error': cardHolderNameInputError}" class="payment-input" name="cardholder" type="text" placeholder="Titular card" required>-->
+<!--                        </label>-->
                     </div>
                     <div class="card-expiry-dates">
-                        <div class="form-input">
-                            <label for="expirymonth">
-                                <input [(ngModel)]="expiryMonth" [ngClass]="{'input-error': expiryMonthInputError}" class="payment-input" name="expirymonth" type="text" placeholder="Luna expirare" required>
-                            </label>
+                        <div>
+                          <mat-form-field style="width: 500px">
+                            <mat-label>Luna expirare</mat-label>
+                            <input type="text" matInput [formControl]="form.controls.expiryMonth">
+                          </mat-form-field>
+<!--                            <label for="expirymonth">-->
+<!--                                <input [(ngModel)]="expiryMonth" [ngClass]="{'input-error': expiryMonthInputError}" class="payment-input" name="expirymonth" type="text" placeholder="Luna expirare" required>-->
+<!--                            </label>-->
                         </div>
-                        <div class="form-input">
-                            <label for="expiryyear">
-                                <input [(ngModel)]="expiryYear" [ngClass]="{'input-error': expiryYearInputError}" class="payment-input" name="expiryyear" type="text" placeholder="An expirare" required>
-                            </label>
+                        <div>
+                          <mat-form-field style="width: 500px">
+                            <mat-label>An expirare</mat-label>
+                            <input type="text" matInput [formControl]="form.controls.expiryYear">
+                          </mat-form-field>
+<!--                            <label for="expiryyear">-->
+<!--                                <input [(ngModel)]="expiryYear" [ngClass]="{'input-error': expiryYearInputError}" class="payment-input" name="expiryyear" type="text" placeholder="An expirare" required>-->
+<!--                            </label>-->
                         </div>
                     </div>
-                    <div class="form-input">
-                        <label for="cvv">
-                            <input [(ngModel)]="cvv" [ngClass]="{'input-error': cvvInputError}" class="payment-input" name="cvv" type="password" placeholder="CVV" required>
-                        </label>
+                    <div>
+                      <mat-form-field style="width: 500px">
+                        <mat-label>CVV</mat-label>
+                        <input type="text" matInput [formControl]="form.controls.cvv">
+                      </mat-form-field>
+<!--                        <label for="cvv">-->
+<!--                            <input [(ngModel)]="cvv" [ngClass]="{'input-error': cvvInputError}" class="payment-input" name="cvv" type="password" placeholder="CVV" required>-->
+<!--                        </label>-->
                     </div>
                 </div>
             </form>
-            <button (click)="checkout()" class="btn">Confirma comanda<fa-icon class="icon" [icon]="faCheck"></fa-icon></button>
+            <button (click)="placeOrder()" class="btn">Confirma comanda<fa-icon class="icon" [icon]="faCheck"></fa-icon></button>
         </div>
     </div>
 </div>

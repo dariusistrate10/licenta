@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ProductVariant } from '../utils/ProductVariant';
 import { HttpClient } from '@angular/common/http';
+import {Review, ReviewPostDTO} from "../utils/Review";
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,17 @@ export class ProductVariantService {
 
   getProductVariantsByCategory(categoryId: number): Observable<ProductVariant[]> {
     return this.http.get<ProductVariant[]>(`${this.url}/product/variant/filter/${categoryId}`)
+  }
+
+  deleteProductVariant(id: number) {
+    return this.http.delete<ProductVariant>(`${this.url}/product/variant/delete/${id}`)
+  }
+
+  getReviewsByProductVariantId(productId: number): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.url}/product/variant/${productId}/reviews`)
+  }
+
+  addReview(productId: number, review: ReviewPostDTO) {
+    return this.http.post<ReviewPostDTO>(`${this.url}/product/variant/${productId}/add/review`, review)
   }
 }

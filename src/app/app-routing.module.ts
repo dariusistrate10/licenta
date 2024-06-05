@@ -17,6 +17,8 @@ import {
   ProductVariantDetailPageComponent
 } from './components/product-variant-detail-page/product-variant-detail-page.component';
 import {BlogComponent} from "./components/blog/blog.component";
+import {ReviewComponent} from "./components/review/review.component";
+import {AdminComponent} from "./components/admin/admin.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -29,10 +31,12 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'product/:id', component: ProductDetailPageComponent},
   {path: 'products/variant/:id', component: ProductVariantDetailPageComponent},
+  {path: 'review/:id', component: ReviewComponent},
   {path: 'cart', component: CartComponent},
   {path: 'success', component: SuccessComponent},
   {path: 'edit/profile', component: EditProfileComponent},
   {path: 'edit/address', component: EditAddressComponent},
+  {path: 'admin', component: AdminComponent},
   {path: '**', redirectTo: ''},
 ];
 

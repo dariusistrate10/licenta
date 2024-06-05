@@ -41,6 +41,13 @@ import {MatButtonModule} from "@angular/material/button";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BlogComponent } from './components/blog/blog.component';
 import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import { ReviewComponent } from './components/review/review.component';
+import { AdminComponent } from './components/admin/admin.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSelectModule} from "@angular/material/select";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBL49jzwaXcjRHZz3vMzDv-jcmf710TWJY",
@@ -81,6 +88,8 @@ const firebaseConfig = {
     ProductVariantDetailPageComponent,
     EquipageComponent,
     BlogComponent,
+    ReviewComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +106,12 @@ const firebaseConfig = {
     MatButtonToggleModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [MatSnackBarModule],
   bootstrap: [AppComponent],

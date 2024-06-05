@@ -1,0 +1,12 @@
+.review {
+  font-family: "Poppins", sans-serif;
+}
+
+.review .review-container {
+  padding: 80px;
+  text-align: center;
+}
+
+.review .review-container form {
+  margin-top: 25px;
+}

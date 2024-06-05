@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AddEditUser, User} from 'src/app/utils/User';
+import {AddEditUser, User, UserPostDTO} from 'src/app/utils/User';
 import { UserService } from 'src/app/services/user.service';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
@@ -35,9 +35,13 @@ export class EditProfileComponent implements OnInit {
   }
 
   updateUser() {
-    const user = this.form.value
+    const user = this.form.value as unknown as UserPostDTO
     if(this.form.valid) {
-      this.userService.updateUser(user).subscribe()
+      this.userService.updateUser(this.loggedUser.id!, user).subscribe()
+      this.snackBar.open("Actualizare efectuata cu succes! Noile date vor fi disponibile la urmatoarea autentificare", "Inchideti", {
+        duration: 5000
+      })
+      this.router.navigate(['/'])
     } else {
       this.snackBar.open('Formular invalid', 'Inchideti', {
         duration: 3000

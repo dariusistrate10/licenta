@@ -10,7 +10,17 @@ export interface User {
     password: string,
     defaultDeliveryAddress: string,
     defaultBillingAddress: string,
-    addresses: Address[]
+    addresses?: Address[]
+}
+
+export interface UserPostDTO {
+  firstName: string,
+  lastName: string,
+  email: string,
+  phoneNumber: string,
+  password: string,
+  defaultDeliveryAddress: string,
+  defaultBillingAddress: string,
 }
 
 export interface AddEditUser {

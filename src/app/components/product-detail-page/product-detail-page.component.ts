@@ -14,6 +14,7 @@ import { ProductValue } from 'src/app/utils/ProductValue';
 import { User } from 'src/app/utils/User';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/utils/Cart';
+import {ProductVariantService} from "../../services/product-variant.service";
 
 @Component({
   selector: 'app-product-detail-page',
@@ -36,7 +37,7 @@ export class ProductDetailPageComponent implements OnInit {
   showModal: boolean = false;
 
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private cartEntryService: CartentryService, private router: Router, private cartService: CartService, private elementRef: ElementRef) {}
+  constructor(private productService: ProductService, private route: ActivatedRoute, private cartEntryService: CartentryService, private router: Router, private cartService: CartService, private elementRef: ElementRef, private productVariantService: ProductVariantService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.getProductById(params['id']));

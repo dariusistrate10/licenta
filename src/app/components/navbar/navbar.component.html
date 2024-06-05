@@ -1,7 +1,7 @@
 <nav class="navbar">
   <div class="container">
     <div class="logo">
-      <a href=""><h1>DD<span>Store</span></h1></a>
+      <a href=""><h1>Zona<span>AC</span></h1></a>
     </div>
     <div class="links">
       <ul>
@@ -24,6 +24,7 @@
         <li class="nav-link cart"><a routerLink='/cart'>
           <fa-icon class="icon" [icon]="faCart"></fa-icon>
           Cos <span>{{cartQuantity$ | async}}</span></a></li>
+        <li *ngIf="role==='admin'" class="nav-link"><a href="/admin">Admin</a></li>
       </ul>
     </div>
     <div class="hamburger-links">

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from 'src/app/utils/User';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from 'src/app/utils/User';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AddEditAddress} from "../../utils/Address";
+import {AddEditAddress, AddressPostDTO} from "../../utils/Address";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AddressService} from "../../services/address.service";
 
 @Component({
   selector: 'app-edit-address',
@@ -20,21 +21,33 @@ export class EditAddressComponent implements OnInit {
     postalCode: new FormControl(null, Validators.required),
   })
 
+  protected addressId!: number | undefined
+
   constructor(private router: Router,
-              private snackBar: MatSnackBar) {}
+              private snackBar: MatSnackBar,
+              private addressService: AddressService) {
+  }
 
   ngOnInit(): void {
-    if(this.loggedUser == null) {
+    if (this.loggedUser == null) {
       this.router.navigate(['/'])
     }
   }
 
   updateAddress() {
-    if(this.form.valid) {
-      // salveaza adresa
+    const address = this.form.value as AddressPostDTO
+    this.loggedUser.addresses?.map(address => {
+      this.addressId = address.id
+    })
+    if (this.form.valid) {
+      this.addressService.updateAddress(this.addressId, address).subscribe()
+      this.snackBar.open("Actualizare efectuata cu succes! Noile date vor fi disponibile la urmatoarea autentificare", "Inchideti", {
+        duration: 5000
+      })
+      this.router.navigate(['/'])
     } else {
       this.snackBar.open('Formular invalid', 'Inchideti', {
-        duration: 3000
+        duration: 10000
       });
     }
   }

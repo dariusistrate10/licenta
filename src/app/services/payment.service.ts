@@ -19,4 +19,8 @@ export class PaymentService {
   addPayment(payment: Payment, userId: number): Observable<Payment> {
     return this.http.post<Payment>(`${this.url}/payment/add/${userId}`, payment);
   }
+
+  deletePayment(id: number) {
+    return this.http.delete<Payment>(`${this.url}/payment/delete/${id}`)
+  }
 }

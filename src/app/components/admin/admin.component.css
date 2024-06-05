@@ -1,0 +1,16 @@
+.admin {
+  font-family: "Poppins", sans-serif;
+}
+
+.admin-container {
+  padding: 50px;
+}
+
+.admin-container h1 {
+  text-align: center;
+}
+
+
+.admin-container .entity {
+  padding: 43px;
+}
