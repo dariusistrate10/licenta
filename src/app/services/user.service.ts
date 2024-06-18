@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { User } from '../utils/User';
+import {User, UserPost, UserPostDTO} from '../utils/User';
 import { Address } from '../utils/Address';
 
 @Injectable({
@@ -21,6 +21,10 @@ export class UserService {
     return this.http.get<User>(`${this.url}/users/search?email=${email}`);
   }
 
+  getUserById(userId: number) {
+    return this.http.get<User>(`${this.url}/users/find/${userId}`)
+  }
+
   addUser(user: User, address: Address): Observable<User> {
     const userWithAddress = {
       ...user,
@@ -31,6 +35,10 @@ export class UserService {
 
   updateUser(id: number, user: User): Observable<User> {
     return this.http.put<User>(`${this.url}/users/update/${id}`, user);
+  }
+
+  createUser(user: UserPostDTO) {
+    return this.http.post<UserPost>(`${this.url}/users/add-user`, user);
   }
 
   deleteUser(id: number) {

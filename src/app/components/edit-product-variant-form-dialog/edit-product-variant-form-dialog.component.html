@@ -1,0 +1,42 @@
+<div mat-dialog-title class="mb-4 mat-bg-primary text-white">
+  <div class="d-flex text-center justify-content-center">
+    <h5 class="ms-3">
+      {{data.text}}</h5>
+  </div>
+</div>
+<mat-dialog-content>
+  <form [formGroup]="data.form" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Nume</mat-label>
+          <input type="text" matInput [formControl]="data.form.controls.name" aria-label="Nume">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Descriere</mat-label>
+          <input type="text" matInput [formControl]="data.form.controls.description" aria-label="Descriere">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Pret</mat-label>
+          <input type="text" matInput [formControl]="data.form.controls.price" aria-label="Pret">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Cantitate</mat-label>
+          <input type="text" matInput [formControl]="data.form.controls.quantity" aria-label="Cantitate">
+        </mat-form-field>
+      </div>
+    </div>
+    <div mat-dialog-actions class="justify-content-center">
+      <button mat-raised-button class="mx-3 bg-white" mat-dialog-close="">Inapoi</button>
+      <button mat-raised-button color="primary" class="mx-3 mat-bg-primary text-white" type="button" (click)="submit()">Salveaza
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
+

@@ -15,6 +15,7 @@ export class EditAddressComponent implements OnInit {
 
   loggedUser: User = JSON.parse(localStorage.getItem('user') || 'null');
   public form = new FormGroup<AddEditAddress>({
+    id: new FormControl(null),
     streetLine: new FormControl(null, Validators.required),
     country: new FormControl(null, Validators.required),
     city: new FormControl(null, Validators.required),

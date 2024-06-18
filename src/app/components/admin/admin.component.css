@@ -14,3 +14,8 @@
 .admin-container .entity {
   padding: 43px;
 }
+
+.admin-container .entity .entity-actions {
+  display: flex;
+  justify-content: space-between;
+}

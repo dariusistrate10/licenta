@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/utils/Address';
-import { User } from 'src/app/utils/User';
+import {AddEditUser, User, UserPostDTO} from 'src/app/utils/User';
 import { AddressService } from 'src/app/services/address.service';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-user-registration',
@@ -75,7 +76,7 @@ export class UserRegistrationComponent implements OnInit {
       return;
     }
 
-    const newUser: User = {
+    let newUser: User = {
       firstName: this.firstname,
       lastName: this.lastname,
       email: this.email,
@@ -86,17 +87,19 @@ export class UserRegistrationComponent implements OnInit {
       addresses: []
     }
 
-    const newAddress: Address = {
+    let newAddress: Address = {
       streetLine: this.streetline,
       postalCode: this.postalcode,
       city: this.city,
       country: this.country
     }
 
+    newUser = {...newUser, addresses: [newAddress]}
+
     this.userService.addUser(newUser, newAddress).subscribe((data) => {
       console.log("Am adaugat user")
     });
-    console.log(newUser.email)
+
     setTimeout(() => {
       this.userService.searchUserByEmail(newUser.email).subscribe((data) => {
         this.foundUser = data;

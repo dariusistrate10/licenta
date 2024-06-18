@@ -19,6 +19,8 @@ import {
 import {BlogComponent} from "./components/blog/blog.component";
 import {ReviewComponent} from "./components/review/review.component";
 import {AdminComponent} from "./components/admin/admin.component";
+import {ProfileComponent} from "./components/profile/profile.component";
+import {EditUserFormDialogComponent} from "./components/edit-user-form-dialog/edit-user-form-dialog.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -37,6 +39,8 @@ const routes: Routes = [
   {path: 'edit/profile', component: EditProfileComponent},
   {path: 'edit/address', component: EditAddressComponent},
   {path: 'admin', component: AdminComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'edit-user-form-dialog', component: EditUserFormDialogComponent},
   {path: '**', redirectTo: ''},
 ];
 

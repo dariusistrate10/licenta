@@ -25,4 +25,8 @@ export class OrderService {
   deleteOrder(id: number) {
     return this.http.delete<Orders>(`${this.url}/orders/delete/${id}`)
   }
+
+  getOrdersByUserId(id: number) {
+    return this.http.get<Orders[]>(`${this.url}/orders/user/${id}`)
+  }
 }

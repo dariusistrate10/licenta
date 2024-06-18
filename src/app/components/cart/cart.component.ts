@@ -22,6 +22,8 @@ import {CartService} from 'src/app/services/cart.service';
 import {Cart} from 'src/app/utils/Cart';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import emailjs, {EmailJSResponseStatus} from "@emailjs/browser";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-cart',
@@ -65,21 +67,38 @@ export class CartComponent implements OnInit {
   cvv!: string;
 
   protected form = new FormGroup<AddEditPayment>({
-    cardNumber: new FormControl(null, Validators.required),
+    cardNumber: new FormControl(null, [Validators.required, Validators.minLength(0), Validators.maxLength(16)]),
     cardHolderName: new FormControl(null, Validators.required),
-    expiryYear: new FormControl(null, Validators.required),
-    expiryMonth: new FormControl(null, Validators.required),
-    cvv: new FormControl(null, Validators.required)
+    expiryYear: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(2)]),
+    expiryMonth: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(2)]),
+    cvv: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(3)])
   })
 
-  constructor(private cartEntryService: CartentryService, private router: Router, private paymentService: PaymentService, private orderService: OrderService, private cartService: CartService, private elementRef: ElementRef, private snackBar: MatSnackBar) {
+  protected streetLine!: string
+  protected postalCode!: string
+  protected country!: string
+  protected city!: string
+  protected products!: any[]
+
+  constructor(private cartEntryService: CartentryService,
+              private router: Router,
+              private paymentService: PaymentService,
+              private orderService: OrderService,
+              private cartService: CartService,
+              private elementRef: ElementRef,
+              private snackBar: MatSnackBar,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
-    console.log(this.loggedUser)
+    this.loggedUser.addresses.map((entry: any) => {
+      this.streetLine = entry.streetLine
+      this.postalCode = entry.postalCode
+      this.country = entry.country
+      this.city = entry.city
+    })
     if (this.loggedUser) {
       this.cartService.findCartByUserId(this.loggedUser.id).subscribe((data) => {
-        console.log(data)
         this.foundCart = data;
         localStorage.setItem('cart', JSON.stringify(this.foundCart))
       });
@@ -88,24 +107,25 @@ export class CartComponent implements OnInit {
       this.cartEntryService.getCartEntry(this.foundCart.id).subscribe((cartEntries) => {
         this.cartEntries$.next(cartEntries)
         this.productCounter = cartEntries.length
-        console.log(this.productCounter)
-        console.log(cartEntries)
       })
       this.cartTotal$ = this.cartEntries$.pipe(
-        map((cartEntries) =>
-          cartEntries.reduce(
-            (total, cartEntry) =>
-              total + (cartEntry.productVariants.reduce((sum, product) => sum + product.price, 0) * cartEntry.quantity),
-            0
-          )
-        )
+        map((cartEntries) => cartEntries.reduce((total, cartEntry) => total + (cartEntry.productVariants.reduce((sum, product) => sum + product.price, 0) * cartEntry.quantity), 0))
       );
       this.productEntries = this.cartEntryService.cartEntries$;
     }
   }
 
+  getCartDetailsString(): string {
+    let cartDetails = '';
+    this.cartEntries$.value.forEach(cartEntry => {
+      cartEntry.productVariants.forEach(product => {
+        cartDetails += `Nume: ${product.name}, Pret: ${product.price}, Cantitate: ${cartEntry.quantity}\n`;
+      });
+    });
+    return cartDetails;
+  }
+
   deleteCartEntry(productId: number) {
-    console.log(productId);
     this.cartEntryService.deleteCartEntry(productId).subscribe();
     window.location.reload();
   }
@@ -148,60 +168,52 @@ export class CartComponent implements OnInit {
   }
 
   public placeOrder() {
-    const payment = this.form.value as Payment
-    if (this.loggedUser) {
-      if (this.form.value) {
-        this.orderService.addOrder(payment, this.loggedUser.id, this.foundCart.id).subscribe()
-        setTimeout(() => {
-          this.cartEntryService.deleteAllCartEntries(this.foundCart.id).subscribe()
-        }, 3000)
-        this.router.navigate(['/success'])
-      } else {
-        this.snackBar.open("Formular invalid!", "Inchideti", {
-          duration: 5000
-        })
+    if (this.form.valid) {
+      this.cartTotal$.subscribe(total => {
+        this.cartTotal = total;
+      });
+      let orderNumber = Math
+      let number: any = Math.random() * 100000000;
+
+      const payment = this.form.value as Payment
+      if (this.loggedUser) {
+        if (this.form.valid) {
+          const emailData = {
+            fullName: `${this.loggedUser.firstName} ${this.loggedUser.lastName}`,
+            firstName: this.loggedUser.firstName,
+            orderNumber: orderNumber.trunc(number),
+            orderDate: this.datePipe.transform(new Date(), 'dd-MM-yyyy')?.replaceAll('-', '.'),
+            products: this.getCartDetailsString(),
+            cartTotal: this.cartTotal,
+            streetLine: this.streetLine,
+            city: this.city,
+            postalCode: this.postalCode,
+            country: this.country,
+            deliveryType: 'Curier',
+            companyEmail: 'suport@zonaac.ro',
+            companyPhone: '0744505856',
+            companyName: 'Zona AC'
+          }
+          this.orderService.addOrder(payment, this.loggedUser.id, this.foundCart.id).subscribe(data => {
+            emailjs.send('service_73xdu79', 'template_h3sa6vm', emailData, 'PChICTTWfichmk82y')
+            setTimeout(() => {
+              this.cartEntryService.deleteAllCartEntries(this.foundCart.id).subscribe()
+            }, 3000)
+            this.router.navigate(['/success'])
+          })
+        } else {
+          this.snackBar.open("Formular invalid!", "Inchideti", {
+            duration: 5000
+          })
+        }
       }
+    } else {
+      this.snackBar.open("Formular invalid!", "Inchideti", {
+        duration: 4000,
+        panelClass: ['error']
+      })
     }
   }
-
-  // checkout() {
-  //   if(this.loggedUser) {
-  //     if(!this.cardNumber) {
-  //       console.log("error")
-  //       this.cardNumberInputError = true;
-  //     } else { this.cardNumberInputError = false } if(!this.cardHolderName) {
-  //       this.cardHolderNameInputError = true;
-  //     } else { this.cardHolderNameInputError = false } if(!this.expiryMonth) {
-  //       this.expiryMonthInputError = true;
-  //     } else { this.expiryMonthInputError = false } if(!this.expiryYear) {
-  //       this.expiryYearInputError = true;
-  //     } else { this.expiryYearInputError = false } if(!this.cvv) {
-  //       this.cvvInputError = true;
-  //     } else { this.cvvInputError = false }
-  //
-  //     if(this.cardNumber && this.cardHolderName && this.expiryMonth && this.expiryYear && this.cvv) {
-  //       const payment: Payment = {
-  //         // id: Math.random(),
-  //         cardNumber: this.cardNumber,
-  //         cardHolderName: this.cardHolderName,
-  //         expiryMonth: this.expiryMonth,
-  //         expiryYear: this.expiryYear,
-  //         cvv: this.cvv,
-  //       }
-  //       console.log(payment)
-  //       console.log(this.loggedUser.id)
-  //       console.log(this.foundCart.id)
-  //       if(payment) {
-  //         this.orderService.addOrder(payment, this.loggedUser.id, this.foundCart.id).subscribe();
-  //         setTimeout(() => {this.cartEntryService.deleteAllCartEntries(this.foundCart.id).subscribe()}, 3000)
-  //         this.router.navigate(['/success'])
-  //       }
-  //     }
-  //   } else {
-  //     alert('Login or Register to place an order!');
-  //     this.router.navigate(['/login'])
-  //   }
-  // }
 
   goCheckout() {
     document.getElementById("targetCheckout")

@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div class="profile">
+  <div class="profile-container">
+    <div class="profile-data">
+      <h1>{{loggedUser.firstName}} {{loggedUser.lastName}}</h1>
+      <p>Email: {{loggedUser.email}}</p>
+      <p>Telefon: {{loggedUser.phoneNumber}}</p>
+      <p>Parola: {{hidePassword(loggedUser.password)}}</p>
+      <p>Adresa livrare: {{loggedUser.defaultDeliveryAddress}}</p>
+      <p>Adresa facturare: {{loggedUser.defaultBillingAddress}}</p>
+      <div *ngFor="let address of loggedUser.addresses">
+        <p>Strada: {{address.streetLine}}</p>
+        <p>Cod postal: {{address.postalCode}}</p>
+        <p>Oras: {{address.city}}</p>
+        <p>Tara: {{address.country}}</p>
+      </div>
+    </div>
+    <div class="profile-orders">
+      <h1>Comenzi plasate ({{ordersNumber}})</h1>
+      <div class="placed-orders">
+        <div *ngFor="let order of orders">
+          <p>ID: {{order.id}}</p>
+          <p>Data: {{formatDate(order.orderDate)}}</p>
+          <p>Metoda plata: {{order.paymentType}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -17,6 +17,10 @@ export class AddressService {
     return this.http.get<Address[]>(`${this.url}/address`);
   }
 
+  getAddressById(id: number) {
+    return this.http.get<Address>(`${this.url}/address/find/${id}`)
+  }
+
   addAddress(address: Address): Observable<Address> {
     return this.http.post<Address>(`${this.url}/address/add`, address)
   }

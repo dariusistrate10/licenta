@@ -19,8 +19,9 @@
         <!-- <li class="nav-link"><a routerLink="/contact">Contact</a></li> -->
         <li class="nav-link"><a routerLink='/about'>Despre</a></li>
         <li class="nav-link"><a routerLink='/blog'>Blog</a></li>
-        <li *ngIf="loggedUser==null" class="nav-link"><a routerLink='/login'>Login</a></li>
-        <li *ngIf="loggedUser!=null" (click)="logout()" class="nav-link"><a>Logout</a></li>
+        <li *ngIf="loggedUser===null" class="nav-link"><a routerLink='/login'>Login</a></li>
+        <li *ngIf="loggedUser!==null" (click)="logout()" class="nav-link"><a>Logout</a></li>
+        <li *ngIf="loggedUser!==null" class="nav-link"><a href="/profile">Profil</a></li>
         <li class="nav-link cart"><a routerLink='/cart'>
           <fa-icon class="icon" [icon]="faCart"></fa-icon>
           Cos <span>{{cartQuantity$ | async}}</span></a></li>

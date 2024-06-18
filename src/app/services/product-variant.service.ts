@@ -24,6 +24,14 @@ export class ProductVariantService {
     )
   }
 
+  addProductVariant(productVariant: ProductVariant) {
+    return this.http.post<ProductVariant>(`${this.url}/product/variant/add`, productVariant)
+  }
+
+  updateProductVariant(productVariantId: number, productVariant: ProductVariant) {
+    return this.http.put<ProductVariant>(`${this.url}/product/variant/update/${productVariantId}`, productVariant)
+  }
+
   getProductVariantId(productVariantId: number): Observable<ProductVariant> {
     return this.http.get<ProductVariant>(`${this.url}/product/variant/find/${productVariantId}`);
   }

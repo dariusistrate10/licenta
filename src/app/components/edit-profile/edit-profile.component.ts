@@ -14,6 +14,7 @@ export class EditProfileComponent implements OnInit {
 
   loggedUser: User = JSON.parse(localStorage.getItem('user') || 'null');
   public form = new FormGroup<AddEditUser>({
+    id: new FormControl(null),
     firstName: new FormControl(null, Validators.required),
     lastName: new FormControl(null, Validators.required),
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -21,6 +22,7 @@ export class EditProfileComponent implements OnInit {
     defaultDeliveryAddress: new FormControl(null),
     defaultBillingAddress: new FormControl(null),
     addresses: new FormControl(null),
+    role: new FormControl(null),
     phoneNumber: new FormControl(null, Validators.required)
   })
 

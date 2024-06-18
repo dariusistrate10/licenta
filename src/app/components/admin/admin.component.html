@@ -3,14 +3,20 @@
   <div class="admin-container">
     <h1>Administrare</h1>
     <div class="entity">
-      <mat-form-field>
-        <mat-label>Entitate</mat-label>
-        <mat-select (selectionChange)="fetchEntity($event.value)">
-          <mat-option *ngFor="let entity of entities" [value]="entity">
-            {{entity}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="entity-actions">
+        <mat-form-field>
+          <mat-label>Entitate</mat-label>
+          <mat-select (selectionChange)="fetchEntity($event.value)">
+            <mat-option *ngFor="let entity of entities" [value]="entity">
+              {{entity}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button *ngIf="selectedEntity === 'Utilizatori' || selectedEntity === 'Adrese' || selectedEntity === 'Produse'"
+                (click)="addEntity(selectedEntity)"
+                mat-raised-button style="height: 56px">Adauga entitate
+        </button>
+      </div>
 
       <div *ngIf="selectedEntity === 'Utilizatori'">
         <table mat-table [dataSource]="usersDataSource" class="mat-elevation-z8">
@@ -43,8 +49,21 @@
             <td mat-cell *matCellDef="let element">{{element.defaultBillingAddress}}</td>
           </ng-container>
           <ng-container matColumnDef="actions">
+
             <th mat-header-cell *matHeaderCellDef>Actiuni</th>
-            <td mat-cell *matCellDef="let element" (click)="deleteUser(element.id)"><button mat-raised-button>Sterge</button></td>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon> format_list_bulleted</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="deleteUser(element.id)" mat-menu-item>
+                  <span>Sterge</span>
+                </button>
+                <button (click)="updateUser(element.id)" mat-menu-item>
+                  <span>Actualizeaza</span>
+                </button>
+              </mat-menu>
+            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumnsUsers"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumnsUsers;"></tr>
@@ -75,7 +94,19 @@
           </ng-container>
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actiuni</th>
-            <td mat-cell *matCellDef="let element" (click)="deleteAddress(element.id)"><button mat-raised-button>Sterge</button></td>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon> format_list_bulleted</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="deleteAddress(element.id)" mat-menu-item>
+                  <span>Sterge</span>
+                </button>
+                <button (click)="updateAddress(element.id)" mat-menu-item>
+                  <span>Actualizeaza</span>
+                </button>
+              </mat-menu>
+            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumnsAddresses"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumnsAddresses;"></tr>
@@ -94,7 +125,7 @@
           </ng-container>
           <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef>Descriere</th>
-            <td mat-cell *matCellDef="let element">{{element.description.slice(0,30)}}...</td>
+            <td mat-cell *matCellDef="let element">{{element.description.slice(0, 30)}}...</td>
           </ng-container>
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Pret</th>
@@ -106,7 +137,19 @@
           </ng-container>
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actiuni</th>
-            <td mat-cell *matCellDef="let element" (click)="deleteProductVariant(element.id)"><button mat-raised-button>Sterge</button></td>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon> format_list_bulleted</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="deleteProductVariant(element.id)" mat-menu-item>
+                  <span>Sterge</span>
+                </button>
+                <button (click)="updateProductVariant(element.id)" mat-menu-item>
+                  <span>Actualizeaza</span>
+                </button>
+              </mat-menu>
+            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumnsProductVariants"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumnsProductVariants;"></tr>
@@ -141,7 +184,9 @@
           </ng-container>
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actiuni</th>
-            <td mat-cell *matCellDef="let element" (click)="deleteOrder(element.id)"><button mat-raised-button>Sterge</button></td>
+            <td mat-cell *matCellDef="let element" (click)="deleteOrder(element.id)">
+              <button mat-raised-button>Sterge</button>
+            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumnsOrders"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumnsOrders;"></tr>
@@ -176,7 +221,9 @@
           </ng-container>
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actiuni</th>
-            <td mat-cell *matCellDef="let element" (click)="deletePayment(element.id)"><button mat-raised-button>Sterge</button></td>
+            <td mat-cell *matCellDef="let element" (click)="deletePayment(element.id)">
+              <button mat-raised-button>Sterge</button>
+            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumnsPayments"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumnsPayments;"></tr>
