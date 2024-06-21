@@ -16,12 +16,12 @@
       </div>
     </div>
     <div class="profile-orders">
-      <h1>Comenzi plasate ({{ordersNumber}})</h1>
+      <h1>Comenzi plasate</h1>
       <div class="placed-orders">
         <div *ngFor="let order of orders">
           <p>ID: {{order.id}}</p>
           <p>Data: {{formatDate(order.orderDate)}}</p>
-          <p>Metoda plata: {{order.paymentType}}</p>
+          <p>Plata: {{order.paymentType}}</p>
         </div>
       </div>
     </div>

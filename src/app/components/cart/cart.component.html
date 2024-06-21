@@ -140,7 +140,7 @@
             <div>
               <mat-form-field style="width: 500px">
                 <mat-label>Luna expirare</mat-label>
-                <input type="number" matInput [formControl]="form.controls.expiryMonth" aria-label="Luna expirare">
+                <input type="text" matInput [formControl]="form.controls.expiryMonth" aria-label="Luna expirare">
                 <mat-error *ngIf="form.controls.expiryMonth.invalid">
                   Luna expirare card este obligatorie
                 </mat-error>
@@ -149,7 +149,7 @@
             <div>
               <mat-form-field style="width: 500px">
                 <mat-label>An expirare</mat-label>
-                <input type="number" matInput [formControl]="form.controls.expiryYear" aria-label="An expirare">
+                <input type="text" matInput [formControl]="form.controls.expiryYear" aria-label="An expirare">
                 <mat-error *ngIf="form.controls.expiryYear.invalid">
                   An expirare card este obligatoriu
                 </mat-error>
@@ -159,7 +159,7 @@
           <div>
             <mat-form-field style="width: 500px">
               <mat-label>CVV</mat-label>
-              <input type="number" matInput [formControl]="form.controls.cvv" aria-label="CVV">
+              <input type="text" matInput [formControl]="form.controls.cvv" aria-label="CVV">
               <mat-error *ngIf="form.controls.cvv.invalid">
                 CVV card este obligatoriu
               </mat-error>

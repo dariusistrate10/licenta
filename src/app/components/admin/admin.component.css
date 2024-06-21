@@ -3,11 +3,12 @@
 }
 
 .admin-container {
-  padding: 50px;
+  padding: 90px 50px 50px 50px;
 }
 
 .admin-container h1 {
   text-align: center;
+  margin-bottom: 30px;
 }
 
 

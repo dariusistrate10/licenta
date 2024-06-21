@@ -23,10 +23,6 @@ export class ProfileComponent implements OnInit {
     this.loggedUser = JSON.parse(localStorage.getItem('user') || 'null');
     this.foundCart = JSON.parse(localStorage.getItem('cart') || 'null');
 
-    if (this.loggedUser.cart.orders.length) {
-      this.ordersNumber = this.loggedUser.cart.orders.length
-    }
-
     this.orderService.getOrdersByUserId(this.loggedUser.id).subscribe(data => {
       if (data) {
         this.orders = data
