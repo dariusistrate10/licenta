@@ -132,6 +132,32 @@ export class AdminComponent implements OnInit {
 
   addUser(formGroup: FormGroup<AddEditUser>) {
     const user = formGroup.value as UserPostDTO
+    let userToAdd = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      password: user.password,
+      defaultDeliveryAddress: user.defaultDeliveryAddress,
+      defaultBillingAddress: user.defaultBillingAddress,
+      addresses: [user.addresses]
+    } as unknown as User
+
+    let newAddress: Address = {
+      streetLine: 'addedForTest',
+      postalCode: 'addedForTest',
+      city: 'addedForTest',
+      country: 'addedForTest'
+    }
+
+    userToAdd = {...userToAdd, addresses: [newAddress]}
+
+    this.userService.addUser(userToAdd, newAddress).subscribe(() => {
+      this.snackBar.open("Entitate adaugata cu succes!", "Inchideti", {
+        duration: 4000,
+        panelClass: ['success']
+      })
+    })
   }
 
   editUser(formGroup: FormGroup<AddEditUser>) {
@@ -289,10 +315,6 @@ export class AdminComponent implements OnInit {
         phoneNumber: new FormControl(null),
         role: new FormControl(null),
         addresses: new FormControl(null)
-        // streetLine: new FormControl(null),
-        // city: new FormControl(null),
-        // country: new FormControl(null),
-        // postalCode: new FormControl(null)
       })
       const text: string = `Adaugati un nou utilizator`;
       this.dialog.open<EditUserFormDialogComponent, EditUserFormData>(EditUserFormDialogComponent,

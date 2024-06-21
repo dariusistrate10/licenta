@@ -65,6 +65,21 @@ export interface AddEditUser {
   addresses: FormControl<Address[] | null>
 }
 
+export interface AddUserPostDTO {
+  firstName: FormControl<string | null>,
+  lastName: FormControl<string | null>,
+  email: FormControl<string | null>,
+  phoneNumber: FormControl<string | null>,
+  password: FormControl<string | null>,
+  defaultDeliveryAddress: FormControl<string | null>,
+  defaultBillingAddress: FormControl<string | null>,
+  addresses: FormControl<Address[] | null>,
+  streetLine: FormControl<string | null>,
+  postalCode: FormControl<string | null>,
+  city: FormControl<string | null>,
+  country: FormControl<string | null>,
+}
+
 export interface AddEditUserPostDTO {
   id: FormControl<number | null>,
   firstName: FormControl<string | null>,
