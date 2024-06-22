@@ -17,8 +17,8 @@ export class UserService {
     return this.http.get<User[]>(`${this.url}/users`)
   }
 
-  searchUserByEmail(email: string): Observable<User>{
-    return this.http.get<User>(`${this.url}/users/search?email=${email}`);
+  searchUserByEmail(email: string, password: string): Observable<User>{
+    return this.http.get<User>(`${this.url}/users/search?email=${email}&password=${password}`);
   }
 
   getUserById(userId: number) {

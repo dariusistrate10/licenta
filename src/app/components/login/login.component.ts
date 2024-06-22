@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.searchUserByEmail(this.email).subscribe(user => {
+    this.userService.searchUserByEmail(this.email, this.password).subscribe(user => {
+      console.log(user)
       if (user) {
         this.foundUser = user;
-        if (this.password === this.foundUser.password) {
           localStorage.setItem('user', JSON.stringify(this.foundUser));
           this.cartService.findCartByUserId(this.foundUser.id).subscribe((data) => {
             this.foundCart = data;
@@ -44,9 +44,6 @@ export class LoginComponent implements OnInit {
           }, error => {
             alert('Error fetching cart');
           });
-        } else {
-          alert('Password does not match');
-        }
       } else {
         alert('User not found');
       }
